@@ -351,6 +351,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\AdministartorRegister\AdministartorsRegister.cshtml" />
+    <Content Include="Views\AdministartorRegister\AdministartorsRegisterDetials.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -370,6 +371,10 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{F1ECC660-9726-47C2-95E6-30CCFF4C4366}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EFDAL\EFDAL.csproj">
       <Project>{08EB6809-8DCA-4942-89AB-87EFBC286B76}</Project>
       <Name>EFDAL</Name>

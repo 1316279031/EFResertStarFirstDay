@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{94EE2658-FAE4-48B5-8E1A-1D19D336896B}</ProjectGuid>
+    <ProjectGuid>{F1ECC660-9726-47C2-95E6-30CCFF4C4366}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IEFDAL</RootNamespace>
-    <AssemblyName>IEFDAL</AssemblyName>
+    <RootNamespace>DAL</RootNamespace>
+    <AssemblyName>DAL</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -34,9 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EFDAL">
-      <HintPath>..\EFDAL\bin\Debug\EFDAL.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -54,17 +51,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IBaseDal.cs" />
-    <Compile Include="ICreateAdministratorDetialDataDal.cs" />
-    <Compile Include="ISessionDal.cs" />
-    <Compile Include="IStudentDataDal.cs" />
-    <Compile Include="IStudentDetialDataDal.cs" />
+    <Compile Include="BaseDal.cs" />
+    <Compile Include="CreateAdministratorDetialDataDal.cs" />
+    <Compile Include="SchoolAdministratorDal.cs" />
+    <Compile Include="StudentDataDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ISchoolAdministratorDal.cs" />
+    <Compile Include="StudentDetialDatasDal.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EFDAL\EFDAL.csproj">
+      <Project>{08EB6809-8DCA-4942-89AB-87EFBC286B76}</Project>
+      <Name>EFDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IEFDAL\IEFDAL.csproj">
+      <Project>{94EE2658-FAE4-48B5-8E1A-1D19D336896B}</Project>
+      <Name>IEFDAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

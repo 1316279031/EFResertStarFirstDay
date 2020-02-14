@@ -16,7 +16,7 @@ namespace Test
                 StudentDb stu = new StudentDb();
             StudentData studata = new StudentData
             {
-                IdCard = "342626200001180191",
+                IdCard = "342626200001180195",
                 Address = "安徽马鞍山",
                 Telephone = "18855579263",
                 PareventTelephone = "18315508706"

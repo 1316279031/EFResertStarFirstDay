@@ -9,12 +9,13 @@ using System.Configuration;
 using EFDAL;
 using System.Threading.Tasks;
 using System.Net.Http;
+using DAL;
 
 namespace EFResertStarFirstDay.Controllers
 {
     public class HomeController : Controller
     {
-        private ISessionDal Dal = new GetSessionDb();
+        private IStudentDetialDataDal dal = new StudentDetialDatasDal(ConfigurationManager.AppSettings["assembly"]);
         [HttpGet]
         public ActionResult Index()
         {
@@ -28,7 +29,6 @@ namespace EFResertStarFirstDay.Controllers
         public ActionResult Index(StudentDetialData stuDetialData, StudentData stuData)
         {
             bool access = true;
-            var stu = Dal.GetSessionDbContext(ConfigurationManager.AppSettings["assembly"]);
             try
             {
                 if (!ModelState.IsValid)
@@ -36,8 +36,7 @@ namespace EFResertStarFirstDay.Controllers
                   return View();
                 }
                 stuDetialData.StudentDatas = stuData;
-                stu.studentDetialDatas.Add(stuDetialData);
-                stu.SaveChanges();
+                dal.AddEntity(stuDetialData);
             }
             catch
             {
