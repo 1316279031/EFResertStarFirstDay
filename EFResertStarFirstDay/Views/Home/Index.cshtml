@@ -1,0 +1,71 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport"  />
+    <link href="~/Content/Index.css" rel="stylesheet"/>
+    <title>Index</title>
+</head>
+<body>
+    <div class="header-top">
+        <p>I'm study again Asp.Net Mvc And EF</p>
+    </div>
+<form id="add-dataForm" action="Index" method="post" name="studentDetials">
+    @Html.AntiForgeryToken()
+    <fieldset>
+        <legend>添加信息</legend>
+        <div class="form-content">
+            <div>
+                <label form="name">姓名</label>
+                <input id="name" name="Name" type="text" placeholder="请输入如您的姓名" required />
+                @Html.ValidationMessage("Name", new { @class = "error" })
+            </div>
+            <div>
+                <label for="deparement">系别</label>
+                <select name="Department" id="deparement" required>
+                    <option value="计算机网络">计算机网络</option>
+                    <option value="计算机软件技术">计算机软件技术</option>
+                    <option value="通信技术">通信技术</option>
+                    <option value="数控加工技术">数控加工技术</option>
+                </select>
+                @Html.ValidationMessage("Department", new { @class = "error" })
+            </div>
+            <div>
+                <label for="class">班级</label>
+                <input name="Class" id="class" type='text' placeholder="请输入班级" required/>
+                @Html.ValidationMessage("Class", new { @class = "error" })
+            </div>
+            <div>
+                <label for="idCrad">身份证号码</label>
+                <input type="text" placeholder="请输入身份证号码" name="IdCard" id="idCard" required />
+                @Html.ValidationMessage("IdCard", new { @class = "error" })
+            </div>
+            <div>
+                <label for="address">家庭地址</label>
+                <input id="address" name="Address" type="text" placeholder="输入家庭地址" required />
+                @Html.ValidationMessage("Address", new { @class = "error" })
+            </div>
+            <div>
+                <label for="telephone">手机号码</label>
+                <input type="text" name="Telephone" id="telephone" placeholder="请输入手机号码" required />
+                @Html.ValidationMessage("Telephone", new { @class = "error" })
+            </div>
+            <div>
+                <label for="pareventTelephone">手机号码</label>
+                <input type="text" name="PareventTelephone" id="pareventTelephone" placeholder="请输入家长手机号码" required />
+                @Html.ValidationMessage("PareventTelephone", new { @class = "error" })
+            </div>
+            <input type="submit"/>
+            @Html.ValidationMessage("validate",new { @class="error"})
+        </div>
+    </fieldset>
+</form>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/Index.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/AdministartorRegister.css" rel="stylesheet" />
+    <title>AdministartorsRegister</title>
+</head>
+<body>
+<div>
+    <h1>标题</h1>
+</div>
+<div id="ajaxUpdate">
+    <form id="register" method="post" action="AdministartorsRegister" name="Register">
+        <fieldset>
+            <div class="content">
+                <legend>管理员注册</legend>
+                <div>
+                    <input id="administratorAccount" name="AdministratorAccount" type="text" placeholder="输入用户名" required />
+                    @Html.ValidationMessage("AdministratorAccount",new {@class="error"})
+                </div>
+                <div>
+                    <input type="password" id="administratorPassword" name="AdministratorPassword" placeholder="输入密码" required />
+                    @Html.ValidationMessage("AdministratorAccount", new { @class = "error" })
+                </div>
+                    <div>
+                    <input id="next" type="submit" value="下一步" />
+                    @Html.ValidationMessage("AdministratorAccount", new { @class = "error" })
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/AdministartorRegisterJS.js"></script>
+</body>
+</html>
