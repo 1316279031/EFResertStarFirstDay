@@ -15,7 +15,7 @@ namespace EFDAL
         //密码
         public string AdministratorPassword { get; set; }
 
-        public virtual CreateAdminitratorDetialData CreateAdminitratorDetialData { get; set; }
+        public virtual CreateAdminitratorDetialData CreateAdminitratorDetialDatas { get; set; }
    }
 
    public class SchoolAdministratorConfig : EntityTypeConfiguration<SchoolAdministrator>
@@ -25,7 +25,6 @@ namespace EFDAL
            ToTable("AdministratorAccount");
            HasKey(x => x.AdministratorAccount);
            Property(x => x.AdministratorPassword).IsRequired().HasMaxLength(15);
-           HasRequired(x => x.CreateAdminitratorDetialData).WithOptional(x=>x.SchoolAdministrator);
        }
    }
 }

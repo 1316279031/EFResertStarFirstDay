@@ -24,7 +24,7 @@ namespace EFDAL
         public string Message { get; set; }
         //创建时间(如果被冻结或未验证(冻结)3天后该账户则会被删除会被别的用户登录 如果期间没有别的用户注册此账户则继续保留)
         public DateTime CreatedTime { get; set; }
-        public  virtual SchoolAdministrator SchoolAdministrator { get; set; }
+        public  virtual SchoolAdministrator SchoolAdministrators { get; set; }
     }
 
    public class CreateAdminitratorDetialDataConfig : EntityTypeConfiguration<CreateAdminitratorDetialData>
@@ -37,6 +37,7 @@ namespace EFDAL
             Property(x => x.IsFreeze);
             Property(x => x.Email).IsRequired();
             Property(x => x.Message);
-        }
+            HasRequired(x => x.SchoolAdministrators).WithRequiredDependent(x => x.CreateAdminitratorDetialDatas).WillCascadeOnDelete(true);
+       }
    }
 }

@@ -8,12 +8,12 @@
         function (e) {
             let $this = $(this);
             let values = $this.serialize();
-            console.log(values);
             e.preventDefault();
             $.ajax({
-                type: "post",
+                type: "Post",
                 url: 'AdministartorsRegister',
-                timeout:2000,
+                data:values,
+                timeout: 2000,
                 beforeSend: function(e) {
                     let $span = $('#next').siblings('span');
                         $span.removeClass('error');
@@ -21,7 +21,6 @@
                 },
                 success: function(data) {
                     $this.remove();
-                    console.log(data);
                     $ajaxUpdate.html(data).hide().fadeIn(300);
                 },
                 fail: function(e) {

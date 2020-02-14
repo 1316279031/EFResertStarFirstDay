@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DAL;
 using EFDAL;
 using IEFDAL;
 
@@ -11,7 +12,7 @@ namespace EFResertStarFirstDay.Controllers
 {
     public class AdministartorRegisterController : Controller
     {
-        private ISessionDal session = new GetSessionDb(); 
+        private ISchoolAdministratorDal dal=new SchoolAdministratorDal(ConfigurationManager.AppSettings["assembly"]);
         // GET: AdministartorRegister
         public ActionResult AdministartorsRegister()
         {
@@ -26,14 +27,30 @@ namespace EFResertStarFirstDay.Controllers
                 ModelState.AddModelError("RegisterError","请检查您的登录信息");
                 return View();
             }
-            var sessionDb=session.GetSessionDbContext(ConfigurationManager.AppSettings["assembly"]);
-            return View("AdministartorsRegisterDetials");
+             Session["admin"] = schoolAdministrator;
+          return View("AdministartorsRegisterDetials");
         }
-
         [HttpGet]
-        public ActionResult AdministartorsRegisterDetials(CreateAdminitratorDetialData detialData)
+        public ActionResult AdministartorsRegisterDetials()
         {
-            return View();
+            return Redirect("AdministartorsRegister");
+        }
+        [HttpPost]
+        public ActionResult AdministartorsRegisterDetials(CreateAdminitratorDetialData cre)
+        {
+            var or= Session["admin"] is SchoolAdministrator;
+            SchoolAdministrator schoolAdministrator=null;
+            if (or == true)
+            {
+                schoolAdministrator = Session["admin"] as SchoolAdministrator;
+            }
+            else
+            {
+                ModelState.AddModelError("RegisterError","出现了意外的错误");
+                return View("AdministartorsRegister");
+            }
+            return Content(schoolAdministrator.AdministratorAccount);
+            //return View();
         }
     }
 }

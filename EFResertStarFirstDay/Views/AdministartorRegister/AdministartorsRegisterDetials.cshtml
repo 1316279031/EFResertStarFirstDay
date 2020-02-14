@@ -1,3 +1,28 @@
-﻿<form>
-
+﻿<form action="AdministartorsRegisterDetials" method="post" name="DetialsRegister">
+    <fieldset>
+        <div>
+            <legend>详细信息</legend>
+            <div>
+                <input placeholder="输入邮箱地址" name="Email" id="email" type="text"/>
+            </div>
+            <div>
+                <select placeholder="输入申请的权限" name="AdministratorAuthority" ,id="authority">
+                    <option value="学籍管理">学籍管理</option>
+                    <option value="班级管理">班级管理</option>
+                    <option value="课目管理">
+                        课目管理
+                    </option>
+                    <option value="图书管理">图书管理</option>
+                    <option value="财务管理">财务管理</option>
+                </select>
+            </div>
+            <div>
+                <textarea name="Message" id="message" placeholder="输入申请信息"></textarea>
+            </div>
+            <div>
+                <input type="submit" value="注册"/>
+            </div>
+        </div>
+    </fieldset>
+   
 </form>

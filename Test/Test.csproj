@@ -74,6 +74,10 @@
       <Project>{F1ECC660-9726-47C2-95E6-30CCFF4C4366}</Project>
       <Name>DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IEFDAL\IEFDAL.csproj">
+      <Project>{94EE2658-FAE4-48B5-8E1A-1D19D336896B}</Project>
+      <Name>IEFDAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

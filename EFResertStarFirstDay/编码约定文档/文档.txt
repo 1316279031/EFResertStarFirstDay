@@ -1,0 +1,8 @@
+约定1:由于数据库配置问题我们在ajax注册管理员后 我们约定其对象存储与Session["admin"]中
+
+
+public ActionResult AdministartorsRegister(SchoolAdministrator schoolAdministrator)在此Action中
+
+
+具体:
+session["admin"]===========>是注册管理员的session
