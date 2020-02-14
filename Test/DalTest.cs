@@ -16,13 +16,13 @@ namespace Test
         {
             SchoolAdministrator sc =new SchoolAdministrator()
             {
-                AdministratorAccount = "1316279032",
+                AdministratorAccount = "1316279031",
                 AdministratorPassword = "1314520hw",
                 CreateAdminitratorDetialDatas = new CreateAdminitratorDetialData()
                 {
                     AdministratorAuthority = "课目管理",
                     CreatedTime = DateTime.Now,
-                    Email = "1316279031@qq.com",
+                    Email = "1316279032@qq.com",
                     IsFreeze = false,
                     Message = "嗯嗯",
                     ValidateCode = "4312"
@@ -36,7 +36,7 @@ namespace Test
                 bor = true;
                 Console.WriteLine("成功");
             }
-            Assert.AreEqual(num,num>0);
+            Assert.AreEqual(bor, true);
         }
         //[TestMethod]
         //public void StudentDatasDalTest()

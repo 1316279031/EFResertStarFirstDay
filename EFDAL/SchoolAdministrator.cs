@@ -16,7 +16,8 @@ namespace EFDAL
         public string AdministratorPassword { get; set; }
 
         public virtual CreateAdminitratorDetialData CreateAdminitratorDetialDatas { get; set; }
-   }
+        public virtual RegisterAdministartorValidateCode ValidateCodes { get; set; }
+    }
 
    public class SchoolAdministratorConfig : EntityTypeConfiguration<SchoolAdministrator>
    {
@@ -25,6 +26,7 @@ namespace EFDAL
            ToTable("AdministratorAccount");
            HasKey(x => x.AdministratorAccount);
            Property(x => x.AdministratorPassword).IsRequired().HasMaxLength(15);
+           HasOptional(x => x.ValidateCodes).WithRequired(x => x.SchoolAdministrators).WillCascadeOnDelete(true);
        }
    }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Infrastructure.Annotations;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
@@ -35,7 +37,7 @@ namespace EFDAL
            HasKey(x => x.ID);
            Property(x => x.AdministratorAuthority).IsRequired();
             Property(x => x.IsFreeze);
-            Property(x => x.Email).IsRequired();
+            Property(x => x.Email).IsRequired().HasMaxLength(40).HasColumnAnnotation("Index",new IndexAnnotation(new IndexAttribute("IX_Email"){IsUnique = true}));
             Property(x => x.Message);
             HasRequired(x => x.SchoolAdministrators).WithRequiredDependent(x => x.CreateAdminitratorDetialDatas).WillCascadeOnDelete(true);
        }

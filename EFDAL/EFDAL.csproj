@@ -227,8 +227,21 @@
     <Compile Include="Migrations\202002141347360_InitialCreate.designer.cs">
       <DependentUpon>202002141347360_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002141524220_ModifyTableAndAddValidateCodeTable.cs" />
+    <Compile Include="Migrations\202002141524220_ModifyTableAndAddValidateCodeTable.designer.cs">
+      <DependentUpon>202002141524220_ModifyTableAndAddValidateCodeTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002141545053_ModifyAdministartorAccountTables.cs" />
+    <Compile Include="Migrations\202002141545053_ModifyAdministartorAccountTables.designer.cs">
+      <DependentUpon>202002141545053_ModifyAdministartorAccountTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002141548178_ModifyAdministartorAccountTablesKey.cs" />
+    <Compile Include="Migrations\202002141548178_ModifyAdministartorAccountTablesKey.designer.cs">
+      <DependentUpon>202002141548178_ModifyAdministartorAccountTablesKey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegisterAdministartorValidateCode.cs" />
     <Compile Include="SchoolAdministrator.cs" />
     <Compile Include="StudentData.cs" />
     <Compile Include="StudentDb.cs" />
@@ -241,6 +254,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202002141347360_InitialCreate.resx">
       <DependentUpon>202002141347360_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002141524220_ModifyTableAndAddValidateCodeTable.resx">
+      <DependentUpon>202002141524220_ModifyTableAndAddValidateCodeTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002141545053_ModifyAdministartorAccountTables.resx">
+      <DependentUpon>202002141545053_ModifyAdministartorAccountTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002141548178_ModifyAdministartorAccountTablesKey.resx">
+      <DependentUpon>202002141548178_ModifyAdministartorAccountTablesKey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -49,6 +49,15 @@ namespace EFResertStarFirstDay.Controllers
                 ModelState.AddModelError("RegisterError","出现了意外的错误");
                 return View("AdministartorsRegister");
             }
+
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+
+            }
             return Content(schoolAdministrator.AdministratorAccount);
             //return View();
         }
