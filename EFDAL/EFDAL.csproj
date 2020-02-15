@@ -223,6 +223,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CreateAdminitratorDetialData.cs" />
+    <Compile Include="ErrorDatabase.cs" />
     <Compile Include="Migrations\202002141347360_InitialCreate.cs" />
     <Compile Include="Migrations\202002141347360_InitialCreate.designer.cs">
       <DependentUpon>202002141347360_InitialCreate.cs</DependentUpon>
@@ -238,6 +239,10 @@
     <Compile Include="Migrations\202002141548178_ModifyAdministartorAccountTablesKey.cs" />
     <Compile Include="Migrations\202002141548178_ModifyAdministartorAccountTablesKey.designer.cs">
       <DependentUpon>202002141548178_ModifyAdministartorAccountTablesKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002150930545_ModifyAndAddErrorTable.cs" />
+    <Compile Include="Migrations\202002150930545_ModifyAndAddErrorTable.designer.cs">
+      <DependentUpon>202002150930545_ModifyAndAddErrorTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -263,6 +268,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002141548178_ModifyAdministartorAccountTablesKey.resx">
       <DependentUpon>202002141548178_ModifyAdministartorAccountTablesKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002150930545_ModifyAndAddErrorTable.resx">
+      <DependentUpon>202002150930545_ModifyAndAddErrorTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

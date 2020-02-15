@@ -56,6 +56,8 @@
   <ItemGroup>
     <Compile Include="IBaseDal.cs" />
     <Compile Include="ICreateAdministratorDetialDataDal.cs" />
+    <Compile Include="IErrorDatabaseDal.cs" />
+    <Compile Include="IRegisterValidateCodeDal.cs" />
     <Compile Include="ISessionDal.cs" />
     <Compile Include="IStudentDataDal.cs" />
     <Compile Include="IStudentDetialDataDal.cs" />

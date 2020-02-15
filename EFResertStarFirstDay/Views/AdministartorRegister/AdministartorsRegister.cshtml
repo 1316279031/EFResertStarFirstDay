@@ -12,31 +12,46 @@
     <title>AdministartorsRegister</title>
 </head>
 <body>
-<div>
+<div class="titleHead">
     <h1>标题</h1>
 </div>
-<div id="ajaxUpdate">
-    <form id="register" method="post" action="AdministartorsRegister" name="Register">
-        <fieldset>
-            <div class="content">
-                <legend>管理员注册</legend>
-                <div>
-                    <input id="administratorAccount" name="AdministratorAccount" type="text" placeholder="输入用户名" required />
-                    @Html.ValidationMessage("AdministratorAccount",new {@class="error"})
-                </div>
-                <div>
-                    <input type="password" id="administratorPassword" name="AdministratorPassword" placeholder="输入密码" required />
-                    @Html.ValidationMessage("AdministratorPassword", new { @class = "error" })
-                </div>
-                    <div>
-                    <input id="next" type="submit" value="下一步" />
-                    @Html.ValidationMessage("RegisterError", new { @class = "error" })
-                </div>
-            </div>
-        </fieldset>
-    </form>
+<div class="modelWindow">
+    <p>本网站默认您同意一下规则</p>
+    <div class="window">
+        <ol>
+            <li>如若抢占他人邮箱一经申诉成功将自动删除所有信息</li>
+        </ol>
+    </div>
+    <div class="close">
+        <button>我同意</button>
+    </div>
 </div>
-<script src="~/Scripts/jquery-3.4.1.js"></script>
-<script src="~/Scripts/AdministartorRegisterJS.js"></script>
+    <div id="ajaxUpdate">
+        <form id="register" method="post" action="AdministartorsRegister" name="Register">
+            <fieldset>
+                <div class="content">
+                    <legend>管理员注册</legend>
+                    <div>
+                        <input id="administratorAccount" name="AdministratorAccount" type="text" placeholder="输入用户名" required />
+                        @Html.ValidationMessage("AdministratorAccount", new { @class = "error" })
+                    </div>
+                    <div>
+                        <input type="password" id="administratorPassword" name="AdministratorPassword" placeholder="输入密码" required />
+                        @Html.ValidationMessage("AdministratorPassword", new { @class = "error" })
+                    </div>
+                    <div>
+                        <a href="#">账号申诉</a>
+                    </div>
+                    <div>
+                        <input disabled id="next" type="submit" value="下一步" />
+                        @Html.ValidationMessage("RegisterError", new { @class = "error" })
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/AdministartorRegisterJS.js"></script>
+    <script src="~/Scripts/modelWindow.js"></script>
 </body>
 </html>

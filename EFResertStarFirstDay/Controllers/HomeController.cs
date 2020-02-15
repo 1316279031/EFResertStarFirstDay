@@ -15,6 +15,7 @@ namespace EFResertStarFirstDay.Controllers
 {
     public class HomeController : Controller
     {
+        private  IErrorDatabaseDal errorDal=new ErrorDatabaseDal(ConfigurationManager.AppSettings["assembly"]);
         private IStudentDetialDataDal dal = new StudentDetialDatasDal(ConfigurationManager.AppSettings["assembly"]);
         [HttpGet]
         public ActionResult Index()
@@ -38,8 +39,14 @@ namespace EFResertStarFirstDay.Controllers
                 stuDetialData.StudentDatas = stuData;
                 dal.AddEntity(stuDetialData);
             }
-            catch
+            catch(Exception e)
             {
+                ErrorDatabase error = new ErrorDatabase()
+                {
+                    DateTime = DateTime.Now,
+                    ErrorMessage = e.Message
+                };
+                errorDal.AddEntity(error);
                 access = false;
             }
             StringBuilder builder = new StringBuilder();

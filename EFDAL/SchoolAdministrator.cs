@@ -25,7 +25,7 @@ namespace EFDAL
        {
            ToTable("AdministratorAccount");
            HasKey(x => x.AdministratorAccount);
-           Property(x => x.AdministratorPassword).IsRequired().HasMaxLength(15);
+           Property(x => x.AdministratorPassword).IsRequired();
            HasOptional(x => x.ValidateCodes).WithRequired(x => x.SchoolAdministrators).WillCascadeOnDelete(true);
        }
    }
