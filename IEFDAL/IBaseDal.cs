@@ -16,7 +16,7 @@ namespace IEFDAL
         /// </summary>
         /// <param name="id">根据主键查找返回</param>
         /// <returns>返回一个T实体</returns>
-        T GetStudentDataEntity(int id);
+        T GetEntity(string id);
         /// <summary>
         /// 根据用户条件返回
         /// </summary>

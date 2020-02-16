@@ -10,6 +10,8 @@ namespace EFDAL
     public class RegisterAdministartorValidateCode
     {
         public  int Id { get; set; }
+        //public string Account { get; set; }
+        //public string  Email { get; set; }
         public string ValidateCode { get; set; }
         public virtual SchoolAdministrator SchoolAdministrators { get; set; }
     }
@@ -21,6 +23,8 @@ namespace EFDAL
             ToTable("ValidateCodes");
             HasKey(key => key.Id);
             Property(validateCode => validateCode.ValidateCode).IsRequired();
+            //Property(x => x.Account).IsRequired();
+            //Property(x => x.Email).IsRequired();
         }
     }
 }

@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
+using DAL;
 using EFDAL;
 using IEFDAL;
 
 namespace EFResertStarFirstDay.Models.ModelBLL
 {
-    public class AdministratorRegisterBll
+    public class AdministratorRegisterBll:IUnCheckAccount
     {
         /// <summary>
         /// 完善管理员注册的系统信息，并将权限冻结
@@ -55,6 +57,64 @@ namespace EFResertStarFirstDay.Models.ModelBLL
             SHA256 sha = new SHA256CryptoServiceProvider();
             var sha256PaHash = sha.ComputeHash(bytes);
           return BitConverter.ToString(sha256PaHash).Replace("-", "").ToLower();
+        }
+        /// <summary>
+        /// 检查数据库中是否存在该账户且邮箱与其绑定
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="email"></param>
+        /// <param name="dal"></param>
+        /// <returns></returns>
+        public SchoolAdministrator UnCheck(string account, string email, ISchoolAdministratorDal dal)
+        {
+            var entity = dal.GetEntity(account);
+            if (entity == null)
+            {
+                return null;
+            }
+            if (entity.CreateAdminitratorDetialDatas.Email == email)
+            {
+                return entity;
+            }
+            return null;
+        }
+
+        public bool CreateValidateSeendToEmail(SchoolAdministrator account, string email, IRegisterValidateCodeDal dal,ISchoolAdministratorDal scdal)
+        {
+            bool CreateGuidIsTrue = true;
+            string guid = "";
+            //创建验证码并发送使用全球唯一标识符
+            try
+            {
+               guid = Guid.NewGuid().ToString();
+                account.ValidateCodes = new RegisterAdministartorValidateCode()
+                {
+                    ValidateCode = guid
+                };
+                scdal.Update(account);
+            }
+            catch (Exception e)
+            {
+                IErrorDatabaseDal errorDal = new ErrorDatabaseDal(ConfigurationManager.AppSettings["assembly"]);
+                ErrorDatabase error = new ErrorDatabase()
+                {
+                    DateTime = DateTime.Now,
+                    ErrorMessage = e.StackTrace.ToString()
+                };
+                errorDal.AddEntity(error);
+                CreateGuidIsTrue = false;
+            }
+
+            if (CreateGuidIsTrue)
+            {
+                ICreateEmail cre= new CreateEnail();
+               var seendOk= cre.SeendEmail(account.AdministratorAccount, email, guid);
+               if (!seendOk)
+               {
+                   CreateGuidIsTrue = false;
+               }
+            }
+            return CreateGuidIsTrue;
         }
     }
 }

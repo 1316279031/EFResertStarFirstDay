@@ -20,7 +20,7 @@ namespace DAL
         }
         //R
         //获取单个实体
-        public T GetStudentDataEntity(int id)
+        public T GetEntity(string id)
         {
             return dbContext.Set<T>().Find(id);
         }
