@@ -5,9 +5,21 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Web;
+using Newtonsoft.Json;
 
 namespace EFResertStarFirstDay.Models.ModelBLL
 {
+    public class SendCloudEmailResponse
+    {
+        //请求是否成功
+        public bool Result { get; set; }
+        //请求响应状态码
+        public int StatusCode { get; set; }
+        //请求是否成功注解
+        public string Message { get; set; }
+        //请求信息包括了接受者邮箱
+        public object Info { get; set; }
+    }
     public class CreateEnail:ICreateEmail
     {
         private  string Apiurl = "https://api.sendcloud.net/apiv2/mail/send";
@@ -24,28 +36,21 @@ namespace EFResertStarFirstDay.Models.ModelBLL
             try
             {
                 client = new HttpClient();
-             var paramList= CreateEmailContent("Jet@YZ", emailAccount, "管理员注册申请",
+             var paramList= CreateEmailContent("Jet@YZ", "1316279031@qq.com", "管理员注册申请",
                     "<p>申请人:" + account + "/" + emailAccount + "</p>" + "<p>申请职位:" + authority + "</p>" + "<p>申请信息:" +
                     message + "</p>" + "<p>如若同意则点击下方链接生成验证码" + url + "</p>");
-
-                #region 邮箱内容
-                //IList<KeyValuePair<String, String>> paramList = new List<KeyValuePair<String, String>>();
-                //paramList.Add(new KeyValuePair<string, string>("apiUser", api_user));
-                //paramList.Add(new KeyValuePair<string, string>("apiKey", api_key));
-                //paramList.Add(new KeyValuePair<string, string>("from",from));
-                //paramList.Add(new KeyValuePair<string, string>("fromName", "Jet@YZ"));
-                //paramList.Add(new KeyValuePair<string, string>("to", emailAccount));
-                //paramList.Add(new KeyValuePair<string, string>("subject", "管理员注册申请"));
-                //paramList.Add(new KeyValuePair<string, string>("html",
-                //    "<p>申请人:" + account + "/" + emailAccount + "</p>" + "<p>申请职位:" + authority + "</p>" + "<p>申请信息:" + message +
-                //    "</p>" + "<p>如若同意则点击下方链接生成验证码" + url+ "</p>"));
-                #endregion
 
                 response = client.PostAsync(Apiurl, new FormUrlEncodedContent(paramList)).Result;
                 if (!response.IsSuccessStatusCode)
                 {
                     statusISOk = false;
-                } 
+                    return statusISOk;
+                }
+                var jsonConvertObject = JsonConvert.DeserializeObject<SendCloudEmailResponse>(response.Content.ReadAsStringAsync().Result);
+                if (jsonConvertObject.StatusCode != 200)
+                {
+                    statusISOk = false;
+                }
             }
             catch (Exception e)
             {
@@ -69,11 +74,16 @@ namespace EFResertStarFirstDay.Models.ModelBLL
            var paramList =CreateEmailContent("Jet@YZ", email, "账号激活验证码",builder.ToString());
             client=new HttpClient();
             response= client.PostAsync(Apiurl, new FormUrlEncodedContent(paramList)).Result;
-            if (response.IsSuccessStatusCode)
+            if (!response.IsSuccessStatusCode)
             {
-                return true;
+                return false;
             }
-            return false;
+            var JsonObj = JsonConvert.DeserializeObject<SendCloudEmailResponse>(response.Content.ReadAsStringAsync().Result);
+            if (JsonObj.StatusCode != 200)
+            {
+                return false;
+            }
+            return true;
         }
         public  IList<KeyValuePair<string,string>> CreateEmailContent(string fromName, string to ,string subject,string htmlText)
         {

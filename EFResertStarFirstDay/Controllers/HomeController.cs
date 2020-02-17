@@ -59,5 +59,16 @@ namespace EFResertStarFirstDay.Controllers
             ModelState.AddModelError("validate", "请检查您的身份证是否错误或以添加");
             return View();
         }
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(SchoolAdministrator administrator)
+        {
+            return View();
+        }
     }
 }

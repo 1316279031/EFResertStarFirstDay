@@ -1,0 +1,138 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+h1{
+    background-color: #000000;
+    background-image: url('../Img/creative-folk.png');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    white-space: nowrap;
+    overflow: hidden;
+    text-indent: 100%;
+    line-height: 2em;
+    margin: 0;
+}
+.titleHead {
+    width: 100%;
+}
+form {
+    width: 80%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+#ajaxUpdate {
+    min-width: 400px;
+    position: relative;
+    width: 30%;
+    height: 300px;
+    float: left;
+    padding-top: 150px;
+    margin-left: 10%;
+    margin-right: 5%;
+    overflow: hidden;
+}
+.rightSlider {
+    min-width: 400px;
+    width: 40%;
+    height: 300px;
+    float: left;
+    position: relative;
+    padding-top: 150px;
+    margin-right: 10%;
+    margin-left: 5%;
+    overflow: hidden;
+}
+.rightSlider::after {
+    content: "";
+    clear: right;
+}
+
+.rightSlider img {
+    width: 100%;
+    height: 66%;
+    position: absolute;
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px #778899;
+    z-index: 0;
+}
+.content::after {
+    content: "";
+    clear: both;
+    display: block;
+}
+fieldset {
+    border: none;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+legend {
+    text-align: center;
+    margin: 5px;
+    font-size: 2em;
+    min-width: 200px;   
+    color: #c0c0c0;
+}
+input[type="text"], input[type="password"]{
+    width: 90%;
+    border: 2px solid #d3d3d3;
+    border-radius: 5px;
+    font-size: 1.25em;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-top: 10px;
+}
+input[class="validateCode"] {
+    width: 60%;
+}
+a.getvalidateCode {
+    width: 25%;
+    display: inline;
+    margin-top: 10px;
+}
+a.getvalidateCode::after {
+    content: "";
+    display: inline;
+}
+input[type="submit"] {
+        width: 100%;
+        border-radius: 10px;
+        display: block;
+        font-size: 1.25em;
+        padding-top: 2%;
+        padding-right: 5%;
+        padding-bottom: 2%;
+        padding-left: 5%;
+        margin-top: 10px;
+        color: aliceblue;
+        background-color: #4169e1;
+        border: #4169e1;
+        box-shadow: inset 2px 2px 50px #00bfff;
+}
+input[type="submit"]:hover {
+    background-color: #00bfff;
+    box-shadow: inset 2px 2px 50px #0000ff;
+}
+.error {
+    color: #ff0000;
+}
+a {
+    text-decoration: none;
+    color: #1e90ff;
+    display: block;
+    float: right;
+    margin: 2px;
+}
+a::after {
+        content:"\2191";
+        display: inline-block;
+    /*制作三角形*/
+        /*width: 0;
+        height: 0;
+        border: 8px solid transparent;
+        border-left: 8px solid #AFABAB;
+        position: relative;
+        top: 2px;
+        left: 5px;*/
+}

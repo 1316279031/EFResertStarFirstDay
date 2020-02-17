@@ -18,12 +18,18 @@ namespace EFResertStarFirstDay.Controllers
         private  IErrorDatabaseDal errorDal=new ErrorDatabaseDal(ConfigurationManager.AppSettings["assembly"]);
         private AdministratorRegisterBll re = new AdministratorRegisterBll();
         private ISchoolAdministratorDal dal=new SchoolAdministratorDal(ConfigurationManager.AppSettings["assembly"]);
+        [HttpGet]
+        public ActionResult PartialView()
+        {
+            return View();
+        }
         // GET: AdministartorRegister
         public ActionResult AdministartorsRegister()
         {
             //异步执行 返回一个具体注册信息
             return View();
         }
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult AdministartorsRegister(SchoolAdministrator schoolAdministrator)
         {
@@ -50,6 +56,7 @@ namespace EFResertStarFirstDay.Controllers
         {
             return View("AdministartorsRegister");
         }
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult AdministartorsRegisterDetials(CreateAdminitratorDetialData cre)
         {
@@ -70,11 +77,14 @@ namespace EFResertStarFirstDay.Controllers
                 var LeftUrl = Request.Url.GetLeftPart(UriPartial.Authority) + rightUrl;
                 try
                 {
-                    
                     var entity = dal.GetEntity(schoolAdministrator.AdministratorAccount);
-                    LeftUrl = LeftUrl+"?account =" + entity.AdministratorAccount + "&email="+ entity.CreateAdminitratorDetialDatas.Email;
+                    LeftUrl = LeftUrl+"?account=" + entity.AdministratorAccount + "&email="+ entity.CreateAdminitratorDetialDatas.Email;
                     ICreateEmail createEmail = new CreateEnail();
-                    createEmail.SeendEmail(LeftUrl,entity.CreateAdminitratorDetialDatas.Email, entity.CreateAdminitratorDetialDatas.Message, entity.AdministratorAccount, entity.CreateAdminitratorDetialDatas.AdministratorAuthority);
+                  bool Ok=  createEmail.SeendEmail(LeftUrl,entity.CreateAdminitratorDetialDatas.Email, entity.CreateAdminitratorDetialDatas.Message, entity.AdministratorAccount, entity.CreateAdminitratorDetialDatas.AdministratorAuthority);
+                  if (!Ok)
+                  {
+                    throw new ArgumentException("邮件发送失败");
+                  }
                 }
                 catch (Exception e)
                 {
@@ -147,7 +157,6 @@ namespace EFResertStarFirstDay.Controllers
             {
                 return Content("程序出现了错误！抱歉");
             }
-            
             return Content("验证码已发送");
         }
     }

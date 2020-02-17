@@ -13,7 +13,6 @@
         $window.find('.close').on('click',
             function(e) {
                 e.preventDefault();
-                console.log(2);
                 $window.fadeOut(200);
                 $("#next").attr("disabled", false);
             });

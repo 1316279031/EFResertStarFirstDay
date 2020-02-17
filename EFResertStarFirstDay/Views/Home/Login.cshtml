@@ -1,0 +1,59 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/Login.css" rel="stylesheet" />
+    <title>登录</title>
+</head>
+<body>
+    <div class="titleHead">
+        <h1>标题</h1>
+</div>
+<div class="content">
+    <div id="ajaxUpdate">
+        <form id="register" method="post" action="AdministartorsRegister" name="Register">
+            @Html.AntiForgeryToken()
+            <fieldset>
+                <div class="content">
+                    <legend>管理员登录</legend>
+                    <div>
+                        <input id="administratorAccount" name="AdministratorAccount" type="text" placeholder="输入用户名" required />
+                        @Html.ValidationMessage("AdministratorAccount", new { @class = "error" })
+                    </div>
+                    <div>
+                        <input type="password" id="administratorPassword" name="AdministratorPassword" placeholder="输入密码" required />
+                        @Html.ValidationMessage("AdministratorPassword", new { @class = "error" })
+                    </div>
+                    <div>
+                        <input class="validateCode" type="text"placeholder="输入邮箱"/>
+                        <a class="getvalidateCode" href="#">获取验证码</a>
+                    </div>
+                    <div>
+                        <a href="#">账号申诉</a>
+                        <a href="#">忘记密码</a>
+                    </div>
+                    <div>
+                        <input id="next" type="submit" value="下一步" />
+                        @Html.ValidationMessage("RegisterError", new { @class = "error" })
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="rightSlider">
+        <img src="~/Img/1.jpg" />
+        <img src="~/Img/2.jpg" />
+        <img src="~/Img/3.jpg" />
+        <img src="~/Img/4.jpg" />
+        <img src="~/Img/5.jpg" />
+    </div>
+    </div>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/MouseSlider.js"></script>
+</body>
+</html>

@@ -1,7 +1,9 @@
 ﻿$(function () {
     let $ajaxUpdate = $('#ajaxUpdate');
     let $Register = $('#register');
-    function  addEvent($Register) {
+    $('span').remove();
+    function AddEvent() {
+
         $Register.on('submit',
             function (e) {
                 let $this = $(this);
@@ -23,13 +25,13 @@
                             $ajaxUpdate.html($(data)).hide().fadeIn(300);
                             return;
                         }
-                        $ajaxUpdate.html($(data).find('#register')).hide().fadeIn(300);
-                        $Register.off('submit');
-                        $Register = $('#register');
-                        addEvent($Register);
+                        $ajaxUpdate.html($(data).find('form')).hide().fadeIn(300);
+                        $Register = $(data);
+                        $Register=$ajaxUpdate.find('form');
+                        $('#next').attr("disabled", false);
+                        AddEvent();
                     },
                     fail: function (e) {
-                        console.log(e.status);
                         let $span = $('#next').siblings('span');
                         $span.addClass('error');
                         $span.text("请求出现了错误");
@@ -37,6 +39,5 @@
                 });
             });
     }
-
-    addEvent($Register);
+    AddEvent();
 });
