@@ -54,6 +54,8 @@
     <Compile Include="BaseDal.cs" />
     <Compile Include="CreateAdministratorDetialDataDal.cs" />
     <Compile Include="ErrorDatabaseDal.cs" />
+    <Compile Include="GenerUserDal.cs" />
+    <Compile Include="GenerUserDetialDal.cs" />
     <Compile Include="RegisterAdministartorValidateCodeDal.cs" />
     <Compile Include="SchoolAdministratorDal.cs" />
     <Compile Include="StudentDataDal.cs" />

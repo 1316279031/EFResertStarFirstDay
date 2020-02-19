@@ -19,7 +19,8 @@ namespace EFResertStarFirstDay.Models.Filters
             var httpContext = filterContext.HttpContext;
             if (!httpContext.Request.Cookies.AllKeys.Contains("GetValidateTime"))
             {
-                httpContext.Session["Validate"] = "";
+                httpContext.Session["Administartor"] = "";
+                httpContext.Session["GenerUser"] = "";
                 return;
             }
             var cookie = httpContext.Request.Cookies["GetValidateTime"];
@@ -28,7 +29,8 @@ namespace EFResertStarFirstDay.Models.Filters
                 cookie.Expires = DateTime.UtcNow.AddHours(-24);
                 cookie.HttpOnly = true;
                 httpContext.Response.Cookies.Add(cookie);
-                httpContext.Session["Validate"] = "";
+                httpContext.Session["Administartor"] = "";
+                httpContext.Session["GenerUser"] = "";
             }
         }
     }

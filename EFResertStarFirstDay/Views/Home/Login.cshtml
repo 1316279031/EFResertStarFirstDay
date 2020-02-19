@@ -20,20 +20,26 @@
             @Html.AntiForgeryToken()
             <fieldset>
                 <div class="content">
-                    <legend>管理员登录</legend>
+                    <legend>登录</legend>
                     <div>
-                        <input id="administratorAccount" name="AdministratorAccount" type="text" placeholder="输入用户名" required />
-                        @Html.ValidationMessage("AdministratorAccount", new { @class = "error" })
+                        <input id="administratorAccount" name="Account" type="text" placeholder="输入用户名" required />
+                        @Html.ValidationMessage("Account", new { @class = "error" })
                     </div>
                     <div>
-                        <input type="password" id="administratorPassword" name="AdministratorPassword" placeholder="输入密码" required />
-                        @Html.ValidationMessage("AdministratorPassword", new { @class = "error" })
+                        <input type="password" id="administratorPassword" name="Password" placeholder="输入密码" required />
+                        @Html.ValidationMessage("Password", new { @class = "error" })
                     </div>
                     <div>
                         <input class="validateCode" type="text"placeholder="输入验证码" name="ValidateCode"/>
                         <a class="getvalidateCode" href="~/Home/GetEmailValidateCode">获取验证码</a>
                     </div>
                     <div>
+                       <div class="option">
+                        <input id="opAd" type="radio" name="Option" value="false"/>
+                        <label for="opAd">管理员</label>
+                        <input id="opAd" type="radio" name="Option" checked="checked" value="true"/>
+                        <label for="opAd">普通用户</label>
+                       </div>
                         <a href="~/AdministartorRegister/AdministartorsRegister">去注册</a>
                         <a href="#">账号申诉</a>
                         <a href="#">忘记密码</a>

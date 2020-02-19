@@ -316,6 +316,7 @@
     <Compile Include="Models\ModelBLL\ILoinValidate.cs" />
     <Compile Include="Models\ModelBLL\IUnCheckAccount.cs" />
     <Compile Include="Models\ModelBLL\LoginValidate.cs" />
+    <Compile Include="Models\ViewModel\LogInModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

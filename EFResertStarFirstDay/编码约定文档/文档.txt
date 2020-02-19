@@ -6,3 +6,15 @@ public ActionResult AdministartorsRegister(SchoolAdministrator schoolAdministrat
 
 具体:
 session["admin"]===========>是注册管理员的session
+
+
+
+
+
+登录页:关于是否是管理员与普通用户的登录约定俗成
+
+	模型绑定:True---->普通用户
+	              False---->管理员
+	约定Session[Key]中的Key名称
+	管理员:Key=Administartor
+	普通用户:GenerUser

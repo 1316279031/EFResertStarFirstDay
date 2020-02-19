@@ -224,6 +224,8 @@
   <ItemGroup>
     <Compile Include="CreateAdminitratorDetialData.cs" />
     <Compile Include="ErrorDatabase.cs" />
+    <Compile Include="GenerUser.cs" />
+    <Compile Include="GenerUserDetial.cs" />
     <Compile Include="Migrations\202002141347360_InitialCreate.cs" />
     <Compile Include="Migrations\202002141347360_InitialCreate.designer.cs">
       <DependentUpon>202002141347360_InitialCreate.cs</DependentUpon>
@@ -244,6 +246,22 @@
     <Compile Include="Migrations\202002150930545_ModifyAndAddErrorTable.designer.cs">
       <DependentUpon>202002150930545_ModifyAndAddErrorTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002191354125_Modify-19.cs" />
+    <Compile Include="Migrations\202002191354125_Modify-19.designer.cs">
+      <DependentUpon>202002191354125_Modify-19.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002191444027_AddGenerUserTable.cs" />
+    <Compile Include="Migrations\202002191444027_AddGenerUserTable.designer.cs">
+      <DependentUpon>202002191444027_AddGenerUserTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002191500180_ModifyGenerUserDetialTable.cs" />
+    <Compile Include="Migrations\202002191500180_ModifyGenerUserDetialTable.designer.cs">
+      <DependentUpon>202002191500180_ModifyGenerUserDetialTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002191501385_AddEamil.cs" />
+    <Compile Include="Migrations\202002191501385_AddEamil.designer.cs">
+      <DependentUpon>202002191501385_AddEamil.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterAdministartorValidateCode.cs" />
@@ -251,6 +269,8 @@
     <Compile Include="StudentData.cs" />
     <Compile Include="StudentDb.cs" />
     <Compile Include="StudentDetialData.cs" />
+    <Compile Include="Validate\StudentData.cs" />
+    <Compile Include="Validate\StudentDetialData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -272,7 +292,20 @@
     <EmbeddedResource Include="Migrations\202002150930545_ModifyAndAddErrorTable.resx">
       <DependentUpon>202002150930545_ModifyAndAddErrorTable.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002191354125_Modify-19.resx">
+      <DependentUpon>202002191354125_Modify-19.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002191444027_AddGenerUserTable.resx">
+      <DependentUpon>202002191444027_AddGenerUserTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002191500180_ModifyGenerUserDetialTable.resx">
+      <DependentUpon>202002191500180_ModifyGenerUserDetialTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002191501385_AddEamil.resx">
+      <DependentUpon>202002191501385_AddEamil.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

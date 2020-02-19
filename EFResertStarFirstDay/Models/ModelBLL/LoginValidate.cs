@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using DAL;
 using EFDAL;
+using EFResertStarFirstDay.Models.ViewModel;
 using IEFDAL;
 
 namespace EFResertStarFirstDay.Models.ModelBLL
@@ -42,6 +45,57 @@ namespace EFResertStarFirstDay.Models.ModelBLL
                 {
                     throw new ArgumentException(e.Message);
                 }
+            }
+            return IsLog;
+        }
+
+        public bool ValidateAccount(LogInModel model, bool option)
+        {
+            try
+            {
+                if (option)
+                {
+                    IGenerUserDal dal = new GenerUserDal(ConfigurationManager.AppSettings["assembly"]);
+                   return  Validate(model, genUserdal: dal);
+                }
+                else
+                {
+                    ISchoolAdministratorDal dal = new SchoolAdministratorDal(ConfigurationManager.AppSettings["assembly"]);
+                   return  Validate(model, schooldal: dal);
+                }
+            }
+            catch (Exception e)
+            {
+              throw new NullReferenceException("不存在该账户");
+            }
+        }
+
+        public bool Validate(LogInModel model,ISchoolAdministratorDal schooldal = null,IGenerUserDal genUserdal=null)
+        {
+            bool IsLog = true;
+            var GetEntitypasswrod = "";
+            var sha256Password = "";
+            ICreateSha256Passwrod sha256 = new AdministratorRegisterBll();
+            sha256Password = sha256.CreateSha256Passsword(model.Password);
+            if (schooldal == null)//如果schoolDal==null说明我们正在使用普通用户登录
+            {
+                var entity = genUserdal.GetEntity(model.Account);
+                if (entity != null)
+                {
+                    GetEntitypasswrod = entity.Password;
+                }
+            }
+            else
+            {
+                var entity = schooldal.GetEntity(model.Account);
+                if (entity != null)
+                {
+                    GetEntitypasswrod = entity.AdministratorPassword;
+                }
+            }
+            if (sha256Password != GetEntitypasswrod)
+            {
+                IsLog = false;
             }
             return IsLog;
         }

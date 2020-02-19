@@ -24,6 +24,8 @@ namespace EFDAL
         }
         public  DbSet<SchoolAdministrator> SchoolAdministrators { get; set; }
         public  DbSet<CreateAdminitratorDetialData> CreateAdminitratorDetialDatas { get; set; }
+        public DbSet<GenerUser> GenerUsers { get; set; }
+        public  DbSet<GenerUserDetial> GenerUserDetials { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             var configColl = Assembly.GetExecutingAssembly().GetTypes()
