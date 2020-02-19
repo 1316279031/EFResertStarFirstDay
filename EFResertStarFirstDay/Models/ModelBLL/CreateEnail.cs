@@ -65,7 +65,13 @@ namespace EFResertStarFirstDay.Models.ModelBLL
             }
             return statusISOk;
         }
-
+        /// <summary>
+        /// 返回true 发送成功, 返回false发送失败
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="email"></param>
+        /// <param name="guid"></param>
+        /// <returns></returns>
         public bool SeendEmail(string account, string email,string guid)
         {
             StringBuilder builder= new StringBuilder();
@@ -96,6 +102,26 @@ namespace EFResertStarFirstDay.Models.ModelBLL
             paramList.Add(new KeyValuePair<string, string>("subject", subject));
             paramList.Add(new KeyValuePair<string, string>("html", htmlText));
             return paramList;
+        }
+
+        public bool SeendEmail(string account, string email, string guid, string subJect)
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.Append("<p>尊敬的:" + account + "/" + email + "您好!</p>");
+            builder.Append("<P> 验证码 :" + guid + "</p>");
+            var paramList = CreateEmailContent("Jet@YZ", email, subJect, builder.ToString());
+            client = new HttpClient();
+            response = client.PostAsync(Apiurl, new FormUrlEncodedContent(paramList)).Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                return false;
+            }
+            var JsonObj = JsonConvert.DeserializeObject<SendCloudEmailResponse>(response.Content.ReadAsStringAsync().Result);
+            if (JsonObj.StatusCode != 200)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

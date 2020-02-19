@@ -13,7 +13,7 @@ using IEFDAL;
 
 namespace EFResertStarFirstDay.Models.ModelBLL
 {
-    public class AdministratorRegisterBll:IUnCheckAccount
+    public class AdministratorRegisterBll:IUnCheckAccount, ICreateSha256Passwrod
     {
         /// <summary>
         /// 完善管理员注册的系统信息，并将权限冻结

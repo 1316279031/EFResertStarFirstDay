@@ -126,12 +126,4 @@ a {
 a::after {
         content:"\2191";
         display: inline-block;
-    /*制作三角形*/
-        /*width: 0;
-        height: 0;
-        border: 8px solid transparent;
-        border-left: 8px solid #AFABAB;
-        position: relative;
-        top: 2px;
-        left: 5px;*/
 }

@@ -62,6 +62,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="UnitTest1.cs" />
@@ -70,6 +71,8 @@
     <Compile Include="DalTest.cs" />
     <Compile Include="UnitTest3.cs" />
     <Compile Include="UnitTest4.cs" />
+    <Compile Include="UnitTest5.cs" />
+    <Compile Include="UnitTest6.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

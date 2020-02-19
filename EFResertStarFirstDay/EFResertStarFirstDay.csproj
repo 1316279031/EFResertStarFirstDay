@@ -303,10 +303,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CreateCookie\CreateCooks.cs" />
+    <Compile Include="Models\CreateJS\CreateJavaScript.cs" />
+    <Compile Include="Models\Filters\CookieExpresFilter.cs" />
     <Compile Include="Models\ModelBLL\AdministratorRegisterBll.cs" />
     <Compile Include="Models\ModelBLL\CreateEnail.cs" />
+    <Compile Include="Models\ModelBLL\CreateValidateCode.cs" />
+    <Compile Include="Models\ModelBLL\GetEntity.cs" />
     <Compile Include="Models\ModelBLL\ICreateEmail.cs" />
+    <Compile Include="Models\ModelBLL\ICreateSha256Passwrod.cs" />
+    <Compile Include="Models\ModelBLL\IGetEntity.cs" />
+    <Compile Include="Models\ModelBLL\ILoinValidate.cs" />
     <Compile Include="Models\ModelBLL\IUnCheckAccount.cs" />
+    <Compile Include="Models\ModelBLL\LoginValidate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -334,6 +343,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile10.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile11.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile12.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile3.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile4.pubxml" />
@@ -343,6 +353,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile8.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile9.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\codeTime.js" />
     <Content Include="Scripts\Index.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -371,6 +382,7 @@
     <Content Include="Views\AdministartorRegister\AdministartorsRegisterDetials.cshtml" />
     <Content Include="Views\AdministartorRegister\PartialView.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\GetEmailValidateCode.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
