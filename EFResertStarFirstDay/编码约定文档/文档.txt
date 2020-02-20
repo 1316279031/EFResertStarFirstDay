@@ -13,8 +13,15 @@ session["admin"]===========>是注册管理员的session
 
 登录页:关于是否是管理员与普通用户的登录约定俗成
 
-	模型绑定:True---->普通用户
-	              False---->管理员
+	模型绑定:generUser---->普通用户
+	              administartor---->管理员
+		Xz---------->校长
 	约定Session[Key]中的Key名称
 	管理员:Key=Administartor
 	普通用户:GenerUser
+	校长的登录动态密码:XzPassword
+	校长的校验码:XzValidate
+	
+校长登陆成功的SessionKey:XzUserLogin
+管理员登陆成功的SessionKey:AdminUserLogin
+普通用户登陆成功的SessionKey:GenerUserLogin

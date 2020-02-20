@@ -49,16 +49,16 @@ namespace EFResertStarFirstDay.Models.ModelBLL
             return IsLog;
         }
 
-        public bool ValidateAccount(LogInModel model, bool option)
+        public bool ValidateAccount(LogInModel model, string option)
         {
             try
             {
-                if (option)
+                if (option== "generUser")//generUser
                 {
                     IGenerUserDal dal = new GenerUserDal(ConfigurationManager.AppSettings["assembly"]);
                    return  Validate(model, genUserdal: dal);
                 }
-                else
+                else//AdministartorUser
                 {
                     ISchoolAdministratorDal dal = new SchoolAdministratorDal(ConfigurationManager.AppSettings["assembly"]);
                    return  Validate(model, schooldal: dal);

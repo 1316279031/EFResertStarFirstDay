@@ -35,5 +35,7 @@ namespace EFResertStarFirstDay.Models.ModelBLL
         /// <param name="subJect">标题</param>
         /// <returns></returns>
         bool SeendEmail(string account, string email, string guid,string subJect);
+
+        bool SeendEmail(string account, string email, string guid, string subJect, string Password, string acc);
     }
 }

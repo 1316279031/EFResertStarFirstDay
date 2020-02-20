@@ -8,6 +8,7 @@ using IEFDAL;
 using System.Configuration;
 using EFDAL;
 using DAL;
+using EFResertStarFirstDay.Models.Bll;
 using EFResertStarFirstDay.Models.CreateCookie;
 using EFResertStarFirstDay.Models.CreateJS;
 using EFResertStarFirstDay.Models.Filters;
@@ -73,114 +74,173 @@ namespace EFResertStarFirstDay.Controllers
         //如果cookie已过期则将session保存的验证码置0
         [LogInCookieTimeValidate]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LogInModel model,string ValidateCode,bool Option)
+        public ActionResult Login(LogInModel model,string ValidateCode, string Option)
         {
             var sessionValidateCode = "";
-            if (Option)
-            {
-                sessionValidateCode=Session["GenerUser"] == null ? "" : Session["GenerUser"].ToString();
-            }
-            else
-            {
-                sessionValidateCode = Session["Administartor"] == null ? "" : Session["Administartor"].ToString();
-            }
-
-            if (ValidateCode.Length<4||sessionValidateCode != ValidateCode)
-            {
-                ModelState.AddModelError("LogInError", "验证码不正确");
-                return View();
-            }
-            ILoinValidate genlog = new LoginValidate();
+            var XzPassword = "";
             try
             {
-                if (Option)
+                //登录逻辑代码
+                switch (Option)
                 {
-                //普通用户登陆逻辑代码
-                #region 普通用户登录代码
-                    //Option为真，则内部代码会选择普通用户方式进行验证
-                    if (genlog.ValidateAccount(model, option:Option))
-                    {
-                        //登录的账户与密码验证成功
-                        return Content("普通用户登录成功");
-                    }
-                    #endregion
-                }
-                else
-                {
-                    #region 管理员登录代码
-                    if (genlog.ValidateAccount(model, Option))
-                    {
-                        //登录的账户与密码验证成功
-                        return Content("管理员登录成功");
-                    }
-                    #endregion 
+                    case "Xz":
+                        {
+                            #region 校长动态密码校验码登录
+                            sessionValidateCode = Session["XzValidate"] == null ? "" : Session["XzValidate"].ToString();
+                            XzPassword = Session["XzPassword"] == null ? "" : Session["XzPassword"].ToString(); 
+                            if (!ComentBll.ExaminationEquals(ValidateCode, sessionValidateCode))
+                            {
+                                ModelState.AddModelError("LogInError", "验证码不正确");
+                                return View();
+                            }
+                            if (model.Account == "1316279031" && model.Password != "" && model.Password == XzPassword)
+                            {
+                                var cookie = HttpContext.Request.Cookies["GetValidateTime"];
+                                ComentBll.SettingExpiredCookie(HttpContext, cookie);
+                                Session["XzUserLogin"] = "1316279031";
+                                return Content("默认用户/校长登录成功");
+                            }
+                            #endregion
+                        }; break;
+                    case "generUser":
+                        {
+                        #region 普通用户登录 
+                        sessionValidateCode = Session["GenerUser"] == null ? "" : Session["GenerUser"].ToString();
+                            if (!ComentBll.ExaminationEquals(ValidateCode, sessionValidateCode))
+                            {
+                                ModelState.AddModelError("LogInError", "验证码不正确");
+                                return View();
+                            }
+                            ILoinValidate genlog = new LoginValidate();
+                            #region 普通用户登录代码
+                            if (genlog.ValidateAccount(model, option: Option))//验证:true Ok false Not Ok
+                            {
+                                var cookie = HttpContext.Request.Cookies["GetValidateTime"];
+                                ComentBll.SettingExpiredCookie(HttpContext, cookie);
+                                //登录的账户与密码验证成功
+                                Session["GenerUserLogin"] = model.Account;
+                                return Content("普通用户登录成功");
+                            }
+                            #endregion
+                        #endregion
+                        }; break;
+                    case "administartor":
+                        {
+                        #region 管理员登录代码
+
+                        sessionValidateCode = Session["Administartor"] == null ? "" : Session["Administartor"].ToString();
+                        if (!ComentBll.ExaminationEquals(ValidateCode, sessionValidateCode))
+                        {
+                            ModelState.AddModelError("LogInError", "验证码不正确");
+                                return View();
+                        }
+                        ILoinValidate genlog = new LoginValidate();
+                            #region 管理员登录代码
+                            if (genlog.ValidateAccount(model, Option))
+                            {
+                                var cookie = HttpContext.Request.Cookies["GetValidateTime"];
+                                ComentBll.SettingExpiredCookie(HttpContext, cookie);
+                                Session["AdminUserLogin"] = model.Account;
+                                //登录的账户与密码验证成功
+                                return Content("管理员登录成功");
+                            }
+                            #endregion
+                        #endregion
+                        }; break;
+                    default:; break;
                 }
             }
             catch (Exception e)
             {
-             ModelState.AddModelError("LogInError", e.Message);
+                ModelState.AddModelError("LogInError", e.Message);
             }
-
-    ModelState.AddModelError("LogInError", "账户名或密码不正确或检查您的登陆选项");
+            ModelState.AddModelError("LogInError", "账户名或密码不正确或检查您的登陆选项");
             return View();
         }
         [HttpGet]
         [CookieExpresFilter]
-        public ActionResult GetEmailValidateCode(LogInModel model, bool Option)
+        public ActionResult GetEmailValidateCode(LogInModel model, string Option )
         {
             bool isValidateForSend = false;
             bool sendIsOk = false;
-            if (model.Account == null || model.Password == null)
-            {
-                return JavaScript("");
-            }
-            ILoinValidate log = new LoginValidate();
+
+            //发送验证码
+            ICreateEmail sendEmail = new CreateEnail();
+            IGetEntity getEntity = new GetEntity();
+            //创建四位随机码
+            String validateCode = CreateValidateCode.CreateValidateCodes();
             try
             {
-                if (log.ValidateAccount(model, option:Option))
+                switch (Option)
+            {
+                case "Xz":
                 {
-                    //创建四位随机码
-                    String validateCode = CreateValidateCode.CreateValidateCodes();
-                    if (Option)
-                    {
+                        if (model.Account == null)
+                        {
+                            return JavaScript("");
+                        }
+                        else
+                        {
+                            //选择校长邮箱发送随机验证码登录
+                            //默认用户
+                            if (model.Account == "1316279031")
+                            {
+                                //动态密码
+                                string password = CreateValidateCode.CreateValidateCodes(4);
+                                sendIsOk = sendEmail.SeendEmail("1316279031", "1316279031@qq.com",
+                                    validateCode, "登陆验证", Password: password, null);
+                                //校验码
+                                Session["XzValidate"] = validateCode;
+                                Session["XzPassword"] = password;
+                            }
+                        }
+                };break;
+                case "generUser":
+                {
+                        if (model.Account == null || model.Password == null)
+                        {
+                            return JavaScript("");
+                        }
                         Session["GenerUser"] = validateCode;
-                    }
-                    else
-                    {
+                        ILoinValidate log = new LoginValidate();
+                        if (sendIsOk == false && log.ValidateAccount(model, option: Option))
+                        {
+                                //获取用户
+                                var generUser = getEntity.GetEntityForKey(model.Account, gerDal);
+                                sendIsOk = sendEmail.SeendEmail(generUser.User, generUser.UserDetial.Email,
+                                    validateCode, "登陆验证");
+                        }
+                };break;
+                case "administartor":
+                {
+                        if (model.Account == null || model.Password == null)
+                        {
+                            return JavaScript("");
+                        }
                         Session["Administartor"] = validateCode;
-                    }
-                    //发送验证码
-                    ICreateEmail sendEmail=new CreateEnail();
-                    IGetEntity getEntity=new GetEntity();
-                    if (Option)
-                    {
-                        //Option为True代表普通用户
-                        //获取用户
-                        var generUser=  getEntity.GetEntityForKey(model.Account, gerDal);
-                       sendIsOk = sendEmail.SeendEmail(generUser.User, generUser.UserDetial.Email,
-                            validateCode, "登陆验证");
-                    }
-                    else//表示为管理员登录所以我们采用管理员方式发送邮件
-                    {
-                        var entity = getEntity.GetEntityForKey(model.Account,
-                            accountSchoolDal);
-                        sendIsOk = sendEmail.SeendEmail(entity.AdministratorAccount, entity.CreateAdminitratorDetialDatas.Email,
-                            validateCode, "登陆验证");
-                       
-                    }
-                    if (sendIsOk)
-                    {
-                        var createCookie = new CreateCooks();
-                        //创建Cookie
-                        var cookie = createCookie.CreateCooki(5);
-                        HttpContext.Response.Cookies.Add(cookie);
-                        isValidateForSend = true;
-                    }
-                }
+                        ILoinValidate log = new LoginValidate();
+                        if (sendIsOk == false && log.ValidateAccount(model, option: Option))
+                        {
+                            var entity = getEntity.GetEntityForKey(model.Account,
+                                accountSchoolDal);
+                            sendIsOk = sendEmail.SeendEmail(entity.AdministratorAccount, entity.CreateAdminitratorDetialDatas.Email,
+                                validateCode, "登陆验证");
+                        }
+                } ; break;
+                default:;break;
+            }
             }
             catch (Exception e)
             {
                 isValidateForSend = false;
+            }
+            if (sendIsOk)
+            {
+                var createCookie = new CreateCooks();
+                //创建Cookie
+                var cookie = createCookie.CreateCooki(5);
+                HttpContext.Response.Cookies.Add(cookie);
+                isValidateForSend = true;
             }
             if (isValidateForSend)
             {

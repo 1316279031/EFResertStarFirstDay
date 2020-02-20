@@ -123,5 +123,26 @@ namespace EFResertStarFirstDay.Models.ModelBLL
             }
             return true;
         }
+
+        public bool SeendEmail(string account, string email, string guid, string subJect, string Password, string acc)
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.Append("<p>尊敬的:" + account + "/" + email + "您好!</p>");
+            builder.Append("<P> 验证码 :" + guid + "</p>");
+            builder.Append("<P> 动态密码 :" + Password + "</p>"); 
+            var paramList = CreateEmailContent("Jet@YZ", email, subJect, builder.ToString());
+            client = new HttpClient();
+            response = client.PostAsync(Apiurl, new FormUrlEncodedContent(paramList)).Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                return false;
+            }
+            var JsonObj = JsonConvert.DeserializeObject<SendCloudEmailResponse>(response.Content.ReadAsStringAsync().Result);
+            if (JsonObj.StatusCode != 200)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

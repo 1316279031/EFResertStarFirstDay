@@ -303,6 +303,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Bll\ComentBll.cs" />
     <Compile Include="Models\CreateCookie\CreateCooks.cs" />
     <Compile Include="Models\CreateJS\CreateJavaScript.cs" />
     <Compile Include="Models\Filters\CookieExpresFilter.cs" />
@@ -345,6 +346,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile10.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile11.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile12.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile13.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile3.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile4.pubxml" />

@@ -12,6 +12,6 @@ namespace EFResertStarFirstDay.Models.ModelBLL
     public interface ILoinValidate
     {
         bool ValidateAccount(SchoolAdministrator administrator, ISchoolAdministratorDal dal);
-        bool ValidateAccount(LogInModel model, bool option);
+        bool ValidateAccount(LogInModel model, string option);
     }
 }

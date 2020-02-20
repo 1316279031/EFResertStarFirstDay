@@ -21,6 +21,8 @@ namespace EFResertStarFirstDay.Models.Filters
             {
                 httpContext.Session["Administartor"] = "";
                 httpContext.Session["GenerUser"] = "";
+                httpContext.Session["XzValidate"] = "";
+                httpContext.Session["XzPassword"] = "";
                 return;
             }
             var cookie = httpContext.Request.Cookies["GetValidateTime"];
@@ -31,6 +33,7 @@ namespace EFResertStarFirstDay.Models.Filters
                 httpContext.Response.Cookies.Add(cookie);
                 httpContext.Session["Administartor"] = "";
                 httpContext.Session["GenerUser"] = "";
+                httpContext.Session["Xz"] = "";
             }
         }
     }
