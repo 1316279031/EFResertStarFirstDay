@@ -1,0 +1,236 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+
+.left {
+    float: left;
+    width: 20%;
+    height: 735px;
+    background-color: rgb(234, 240, 240);
+    border-right: 1px solid #f3f3f3;
+    margin-left: 1px;
+}
+
+.right {
+    float: left;
+    width: 79.8%;
+    height: 735px;
+    background-color: #ffffff;
+}
+
+.loginAccountData {
+    font-size: 2em;
+    height: 99px;
+    border-bottom: 1px solid #bbbbbb;
+}
+
+    .loginAccountData span {
+        white-space: nowrap;
+        margin-left: 5%;
+        letter-spacing: 1px;
+        line-height: 80px;
+    }
+
+.right-tops {
+    max-height: 100px;
+    overflow: hidden;
+}
+
+.right-top {
+    background-color: rgb(155, 197, 231);
+    height: 100px;
+}
+
+.right-top-dav {
+    float: left;
+    width: 60%;
+    padding-left: 10px;
+}
+
+.nav ul {
+    display: inline;
+    padding-inline-start: 0px;
+    font-size: 2em;
+}
+
+.nav li {
+    display: inline;
+    list-style: none;
+}
+
+.lis {
+    height: 100px;
+    width: 100px;
+    float: left;
+    line-height: 100px;
+    padding-left: 20px;
+    padding-right: 20px;
+    cursor: pointer;
+}
+
+li > .lis:hover {
+    background-color: #c5c2c2;
+}
+
+.nav::after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+.setting {
+    float: right;
+    font-size: 1.25em;
+    line-height: 100px;
+}
+
+    .setting span::after {
+        content: "";
+        position: relative;
+        top: 10px;
+        margin-left: 2px;
+        display: inline-block;
+        border: 10px solid transparent;
+        border-top: 10px solid #000000;
+        width: 0px;
+        width: 0px;
+    }
+
+.left-admin {
+    font-size: 2em;
+}
+
+.admini {
+    height: 110px;
+    border-bottom: 1px solid #c5c2c2;
+}
+
+    .admini span {
+        margin-left: 5%;
+        display: block;
+    }
+
+.detials {
+    display: inline;
+    font-size: 16px;
+}
+
+    .detials span {
+        margin-left: 15%;
+        font-size: 1.25em;
+        display: block;
+    }
+
+.admini span::after {
+    content: "";
+    display: inline-block;
+    border: 10px solid transparent;
+    border-left: 10px solid black;
+    width: 0px;
+    height: 0px;
+    margin-left: 5px;
+}
+
+.detials > span::after {
+    content: "";
+    display: inline-block;
+    border: none;
+    border-left: none;
+    width: 0px;
+    height: 0px;
+    margin-left: 5px;
+}
+
+@media(max-width: 1200px) {
+    .loginAccountData {
+        font-size: 1.75em;
+    }
+
+        .loginAccountData span {
+            line-height: 1.75em;
+        }
+
+    .left-admin {
+        margin-left: 5%;
+        font-size: 1em;
+    }
+}
+
+@media(max-width: 800px) {
+    .loginAccountData {
+        font-size: 1.5em;
+    }
+
+        .loginAccountData span {
+            line-height: 1.5em;
+        }
+
+    .left-admin {
+        margin-left: 5%;
+        font-size: 1em;
+    }
+}
+
+@media(max-width: 680px) {
+    .loginAccountData {
+        font-size: 1.25em;
+        height: 80px;
+    }
+
+        .loginAccountData span {
+            line-height: 80px;
+        }
+
+    .left-admin {
+        margin-left: 5%;
+        font-size: 1em;
+    }
+
+    .right-top {
+        height: 80px;
+    }
+
+    .left {
+        float: left;
+        width: 30%;
+        height: 735px;
+    }
+
+    .right {
+        float: left;
+        width: 69.3%;
+        height: 735px;
+    }
+
+    .setting {
+        float: right;
+        font-size: 0.75em;
+        line-height: 80px;
+    }
+
+    .right-top-dav {
+        float: left;
+        width: 60%;
+    }
+
+    .right-tops {
+        max-height: 100px;
+        overflow: hidden;
+    }
+
+    .nav ul {
+        font-size: 0.55em;
+    }
+
+    .lis {
+        height: 80px;
+        width: 30px;
+        float: left;
+        line-height: 80px;
+        padding-left: 12.5px;
+        padding-right: 12.5px;
+        cursor: pointer;
+    }
+}

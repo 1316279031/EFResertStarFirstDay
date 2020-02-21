@@ -1,0 +1,95 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/LoginAfterLayOutCss.css" rel="stylesheet" />
+    @RenderSection("headerLinks",required:true)
+    <title>管理</title>
+</head>
+<body>
+    <div class="contnet">
+        <div class="left">
+            <div class="loginAccountData">
+                <span>权限: @RenderSection("authority", required: true)</span>
+            </div>
+            <div class=left-admin>
+                <div class="admini">
+                    <span>校长</span>
+                    <div class="detials">
+                        <span>过审账号</span>
+                        <span>未过审账号</span>
+                    </div>
+                </div>
+                <div class="admini">
+                    <span>课目管理</span>
+                    <div class="detials">
+                        <span>增设课目</span>
+                        <span>拟引进课目</span>
+                    </div>
+                </div>
+                <div class="admini">
+                    <span>学籍管理</span>
+                    <div class="detials">
+                        <span>学籍录入</span>
+                        <span>其他</span>
+                    </div>
+                </div>
+                <div class="admini">
+                    <span>图书管理</span>
+                    <div class="detials">
+                        <span>新增数籍</span>
+                        <span>借阅系统</span>
+                    </div>
+                </div>
+                <div class="admini">
+                    <span>财务管理</span>
+                    <div class="detials">
+                        <span>学费管理</span>
+                        <span>考试缴费</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="right-tops">
+                <div class="right-top-dav">
+                    <div class="nav">
+                        <ul>
+                            <li>
+                                <div class="lis">
+                                    <span>某中心</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="lis">
+                                    <span>某中心</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="lis">
+                                    <span>某中心</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="lis">
+                                    <span>某中心</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="right-top">
+                    <div class="setting">
+                        <span>@RenderSection("account",required:true)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="views">
+                @RenderSection("view",required:true)
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -299,6 +299,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdministartorRegisterController.cs" />
+    <Compile Include="Controllers\AdministartorsViewsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -328,6 +329,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Index.css" />
     <Content Include="Content\Login.css" />
+    <Content Include="Content\LoginAfterLayOutCss.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -347,6 +349,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile11.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile12.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile13.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile14.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile3.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile4.pubxml" />
@@ -386,6 +389,8 @@
     <Content Include="Views\AdministartorRegister\PartialView.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\GetEmailValidateCode.cshtml" />
+    <Content Include="Views\Shared\LoginAfterLayOut.cshtml" />
+    <Content Include="Views\AdministartorsViews\XzViews.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

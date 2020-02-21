@@ -139,6 +139,9 @@ a::after {
 .option {
     display: block;
 }
+label {
+        white-space: nowrap;
+}
 @media(max-width: 500px) {
     #ajaxUpdate {
         min-width: 300px;
@@ -156,7 +159,7 @@ a::after {
         position: relative;
         margin-right: 50px;
         margin-left: 50px;
-        margin-top:50px;
+        margin-top:80px;
     }
     a.getvalidateCode {
         width: 25%;
@@ -164,10 +167,15 @@ a::after {
         margin-top: 10px;
         white-space: nowrap;
     }
-
+    a.redi {
+        white-space: nowrap;
+    }
     a.getvalidateCode::after {
         content: "";
         display: inline;
+    }
+    label {
+        white-space: nowrap;
     }
     .option {
         display: block;
