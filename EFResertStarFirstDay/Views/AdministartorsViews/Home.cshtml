@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "XzViews";
+    Layout = "~/Views/Shared/LoginAfterLayOut.cshtml";
+}
+
+@* 这里我们使用我们的框架 *@
+@section headerLinks
+{
+
+    <link href="~/Content/handsontable/handsontable.full.css" rel="stylesheet" />
+}
+@section authority
+{
+    @ViewData["AdministratorAuthority"]
+}
+@section account
+{
+    @ViewData["AdministratorName"]
+}
+@section view
+{
+    <div class="home-view">
+        首页/公告/工作安排
+    </div>
+}
+
+@section scripts
+{
+
+}

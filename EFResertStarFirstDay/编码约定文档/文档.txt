@@ -25,3 +25,9 @@ session["admin"]===========>是注册管理员的session
 校长登陆成功的SessionKey:XzUserLogin
 管理员登陆成功的SessionKey:AdminUserLogin
 普通用户登陆成功的SessionKey:GenerUserLogin
+
+
+
+当我们进入管理员主业时我们需要使用session将数据统一到一个对象中 存放到session 这里我们约定
+
+Session[key]:key=AdministratorObject

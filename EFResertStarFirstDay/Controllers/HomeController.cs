@@ -97,8 +97,9 @@ namespace EFResertStarFirstDay.Controllers
                             {
                                 var cookie = HttpContext.Request.Cookies["GetValidateTime"];
                                 ComentBll.SettingExpiredCookie(HttpContext, cookie);
+                                LoginModifySessionData(HttpContext);
                                 Session["XzUserLogin"] = "1316279031";
-                                return Content("默认用户/校长登录成功");
+                                return Redirect("~/AdministartorsViews/Home");
                             }
                             #endregion
                         }; break;
@@ -117,6 +118,7 @@ namespace EFResertStarFirstDay.Controllers
                             {
                                 var cookie = HttpContext.Request.Cookies["GetValidateTime"];
                                 ComentBll.SettingExpiredCookie(HttpContext, cookie);
+                                LoginModifySessionData(HttpContext);
                                 //登录的账户与密码验证成功
                                 Session["GenerUserLogin"] = model.Account;
                                 return Content("普通用户登录成功");
@@ -140,9 +142,10 @@ namespace EFResertStarFirstDay.Controllers
                             {
                                 var cookie = HttpContext.Request.Cookies["GetValidateTime"];
                                 ComentBll.SettingExpiredCookie(HttpContext, cookie);
+                                LoginModifySessionData(HttpContext);
                                 Session["AdminUserLogin"] = model.Account;
                                 //登录的账户与密码验证成功
-                                return Content("管理员登录成功");
+                                return Redirect("~/AdministartorsViews/Home");
                             }
                             #endregion
                         #endregion
@@ -248,6 +251,13 @@ namespace EFResertStarFirstDay.Controllers
                 return JavaScript(str);
             }
             return new HttpStatusCodeResult(505);
+        }
+
+        public void LoginModifySessionData(HttpContextBase httpContext)
+        {
+            httpContext.Session["XzUserLogin"] = null;
+            httpContext.Session["AdminUserLogin"] = null;
+            httpContext.Session["GenerUserLogin"] = null;
         }
     }
 }

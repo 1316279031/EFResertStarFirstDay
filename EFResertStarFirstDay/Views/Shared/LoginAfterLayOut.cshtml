@@ -16,35 +16,35 @@
             </div>
             <div class=left-admin>
                 <div class="admini">
-                    <span>校长</span>
+                    <span><a href="~/AdministartorsViews/XzViews" class="redict">校长</a></span>
                     <div class="detials">
                         <span>过审账号</span>
                         <span>未过审账号</span>
                     </div>
                 </div>
                 <div class="admini">
-                    <span>课目管理</span>
+                    <span><a href="#" class="redict">课目管理</a></span>
                     <div class="detials">
                         <span>增设课目</span>
                         <span>拟引进课目</span>
                     </div>
                 </div>
                 <div class="admini">
-                    <span>学籍管理</span>
+                    <span><a href="#" class="redict">学籍管理</a></span>
                     <div class="detials">
                         <span>学籍录入</span>
                         <span>其他</span>
                     </div>
                 </div>
                 <div class="admini">
-                    <span>图书管理</span>
+                    <span><a href="#" class="redict">图书管理</a></span>
                     <div class="detials">
                         <span>新增数籍</span>
                         <span>借阅系统</span>
                     </div>
                 </div>
                 <div class="admini">
-                    <span>财务管理</span>
+                    <span><a href="#" class="redict">财务管理</a></span>
                     <div class="detials">
                         <span>学费管理</span>
                         <span>考试缴费</span>
@@ -82,14 +82,55 @@
                 </div>
                 <div class="right-top">
                     <div class="setting">
-                        <span>@RenderSection("account",required:true)</span>
+                        <span>@RenderSection("account", required: true)</span>
                     </div>
                 </div>
             </div>
             <div class="views">
-                @RenderSection("view",required:true)
+                @RenderSection("view", required: true)
             </div>
         </div>
     </div>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/handsontable/handsontable.full.js"></script>
+    <script src="~/Scripts/handsontable/createTable.js">
+    </script>
+<script>
+    function AddEventList($links) {
+        $links.each(function (index) {
+            let $this = $(this);
+            let href = $this.attr('href');
+            console.log(href);
+            $(this).on('click',
+                function (e) {
+                    e.preventDefault();
+                    AjaxRequest(href);
+                });
+        });
+    }
+
+    function AjaxRequest(href) {
+        $.ajax({
+            type: "Get",
+            url: href,
+            beforeSend: function (e) {
+                let $views = $('.views');
+                $views.append('<div><p>加载中。。。。</p></div>');
+            },
+            success: function(data, e) {
+                $('.views div').remove();
+                let $data = $(data);
+                let $views = $('.views');
+                $views.append($data);
+                createTable();//创建表格（根据数据创建表格）但目前先搭起整个框架的样子，之后在使用Json数据创建表格
+            }
+        });
+    }
+    let $link = $('.redict');
+    AddEventList($link);
+</script>
+
+
+    @RenderSection("scripts", required: false)
 </body>
 </html>

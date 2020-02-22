@@ -307,7 +307,9 @@
     <Compile Include="Models\Bll\ComentBll.cs" />
     <Compile Include="Models\CreateCookie\CreateCooks.cs" />
     <Compile Include="Models\CreateJS\CreateJavaScript.cs" />
+    <Compile Include="Models\Filters\AdministratorsViewsAttribute.cs" />
     <Compile Include="Models\Filters\CookieExpresFilter.cs" />
+    <Compile Include="Models\ModelBLL\AdministratorObject.cs" />
     <Compile Include="Models\ModelBLL\AdministratorRegisterBll.cs" />
     <Compile Include="Models\ModelBLL\CreateEnail.cs" />
     <Compile Include="Models\ModelBLL\CreateValidateCode.cs" />
@@ -327,6 +329,10 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\handsontable\handsontable.css" />
+    <Content Include="Content\handsontable\handsontable.full.css" />
+    <Content Include="Content\handsontable\handsontable.full.min.css" />
+    <Content Include="Content\handsontable\handsontable.min.css" />
     <Content Include="Content\Index.css" />
     <Content Include="Content\Login.css" />
     <Content Include="Content\LoginAfterLayOutCss.css" />
@@ -360,6 +366,11 @@
     <None Include="Properties\PublishProfiles\FolderProfile9.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\codeTime.js" />
+    <Content Include="Scripts\handsontable\createTable.js" />
+    <Content Include="Scripts\handsontable\handsontable.full.js" />
+    <Content Include="Scripts\handsontable\handsontable.full.min.js" />
+    <Content Include="Scripts\handsontable\handsontable.js" />
+    <Content Include="Scripts\handsontable\handsontable.min.js" />
     <Content Include="Scripts\Index.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -390,6 +401,8 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\GetEmailValidateCode.cshtml" />
     <Content Include="Views\Shared\LoginAfterLayOut.cshtml" />
+    <Content Include="Scripts\test\test.json" />
+    <Content Include="Views\AdministartorsViews\Home.cshtml" />
     <Content Include="Views\AdministartorsViews\XzViews.cshtml" />
   </ItemGroup>
   <ItemGroup>

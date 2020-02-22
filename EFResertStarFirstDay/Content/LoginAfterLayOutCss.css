@@ -142,52 +142,160 @@ li > .lis:hover {
     height: 0px;
     margin-left: 5px;
 }
+a.redict {
+    text-decoration: none;
+    color: #001000;
+}
 
-@media(max-width: 1200px) {
+@media(max-width: 1300px) {
     .loginAccountData {
-        font-size: 1.75em;
+        font-size: 1.5em;
+        height: 80px;
     }
 
-        .loginAccountData span {
-            line-height: 1.75em;
-        }
+    .loginAccountData span {
+        line-height: 80px;
+    }
 
     .left-admin {
         margin-left: 5%;
+        font-size: 1.25em;
+    }
+
+    .admini span {
         font-size: 1em;
+    }
+
+    .right-top {
+        height: 80px;
+    }
+
+    .left {
+        float: left;
+        width: 25%;
+        height: 735px;
+    }
+
+    .right {
+        float: left;
+        width: 74.3%;
+        height: 735px;
+    }
+
+    .setting {
+        float: right;
+        font-size: 1.25em;
+        line-height: 80px;
+    }
+
+    .right-top-dav {
+        float: left;
+        width: 60%;
+    }
+
+    .right-tops {
+        max-height: 100px;
+        overflow: hidden;
+    }
+
+    .nav ul {
+        font-size: 1.25em;
+    }
+
+    .lis {
+        height: 80px;
+        width: 65px;
+        float: left;
+        line-height: 80px;
+        padding-left: 15px;
+        padding-right: 15px;
+        cursor: pointer;
     }
 }
 
-@media(max-width: 800px) {
+@media(max-width: 1000px) {
     .loginAccountData {
         font-size: 1.5em;
+        height: 80px;
     }
 
-        .loginAccountData span {
-            line-height: 1.5em;
-        }
+    .loginAccountData span {
+        line-height: 80px;
+    }
 
     .left-admin {
         margin-left: 5%;
+        font-size: 1.25em;
+    }
+
+    .admini span {
         font-size: 1em;
+    }
+
+    .right-top {
+        height: 80px;
+    }
+
+    .left {
+        float: left;
+        width: 25%;
+        height: 735px;
+    }
+
+    .right {
+        float: left;
+        width: 74.3%;
+        height: 735px;
+    }
+
+    .setting {
+        float: right;
+        font-size: 1.25em;
+        line-height: 80px;
+    }
+
+    .right-top-dav {
+        float: left;
+        width: 60%;
+    }
+
+    .right-tops {
+        max-height: 100px;
+        overflow: hidden;
+    }
+
+    .nav ul {
+        font-size: 1.25em;
+    }
+
+    .lis {
+        height: 80px;
+        width: 65px;
+        float: left;
+        line-height: 80px;
+        padding-left: 15px;
+        padding-right: 15px;
+        cursor: pointer;
     }
 }
 
 @media(max-width: 680px) {
     .loginAccountData {
-        font-size: 1.25em;
+        font-size: 0.8em;
         height: 80px;
     }
 
-        .loginAccountData span {
+    .loginAccountData span {
             line-height: 80px;
-        }
+    }
 
     .left-admin {
         margin-left: 5%;
+        font-size: 1.25em;
+    }
+    .admini span {
         font-size: 1em;
     }
-
     .right-top {
         height: 80px;
     }
