@@ -8,6 +8,7 @@
             function (e) {
                 let $this = $(this);
                 let values = $this.serialize();
+                console.log(values);
                 e.preventDefault();
                 $.ajax({
                     type: "Post",

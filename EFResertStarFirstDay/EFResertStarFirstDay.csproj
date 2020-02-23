@@ -199,6 +199,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
       <Private>True</Private>
@@ -308,6 +309,7 @@
     <Compile Include="Models\CreateCookie\CreateCooks.cs" />
     <Compile Include="Models\CreateJS\CreateJavaScript.cs" />
     <Compile Include="Models\Filters\AdministratorsViewsAttribute.cs" />
+    <Compile Include="Models\Filters\AdminPartialViewFilter.cs" />
     <Compile Include="Models\Filters\CookieExpresFilter.cs" />
     <Compile Include="Models\ModelBLL\AdministratorObject.cs" />
     <Compile Include="Models\ModelBLL\AdministratorRegisterBll.cs" />
@@ -320,6 +322,8 @@
     <Compile Include="Models\ModelBLL\ILoinValidate.cs" />
     <Compile Include="Models\ModelBLL\IUnCheckAccount.cs" />
     <Compile Include="Models\ModelBLL\LoginValidate.cs" />
+    <Compile Include="Models\ModelBLL\TableDataAJaxPost\ISchoolTableUpdateDatabase.cs" />
+    <Compile Include="Models\ModelBLL\TableDataAJaxPost\UpdateDataBase.cs" />
     <Compile Include="Models\ViewModel\LogInModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -381,6 +385,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\LayOutAjax.js" />
     <Content Include="Scripts\modelWindow.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\MouseSlider.js" />
@@ -403,7 +408,6 @@
     <Content Include="Views\Shared\LoginAfterLayOut.cshtml" />
     <Content Include="Scripts\test\test.json" />
     <Content Include="Views\AdministartorsViews\Home.cshtml" />
-    <Content Include="Views\AdministartorsViews\XzViews.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

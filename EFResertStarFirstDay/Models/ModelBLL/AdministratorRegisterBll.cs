@@ -26,7 +26,7 @@ namespace EFResertStarFirstDay.Models.ModelBLL
         {
             school.AdministratorPassword = CreateSha256Passsword(school.AdministratorPassword);
         cre.CreatedTime=DateTime.Now;
-        cre.IsFreeze = false;
+        cre.IsFreeze = true;//IsFreeze:是否冻结
         school.CreateAdminitratorDetialDatas = cre;
             var num = dal.AddEntity(school);
             return num > 0;

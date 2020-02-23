@@ -35,20 +35,21 @@ $(function () {
     let href = $getCode.attr('href');
     let text = $getCode.text();
     let $login = $("#Login");
-    let QueryString;
+    let QueryString="";
     $getCode.on('click', function (e) {
-        QueryString= $login.serialize();
+        QueryString = $login.serialize();
+        console.log(QueryString);
         e.preventDefault();
         console.log(getValidate.IsRequest);
         if (getValidate.IsRequest !== false) {
             return;
-        }  
+        }
         $.ajax({
             type: "Get",
             url: href,
             data:QueryString,
             success: function (data) {
-                if (data == "") {
+                if (data === "") {
                     getValidate.IsRequest = false;
                 } else {
                     getValidate.IsRequest = true;

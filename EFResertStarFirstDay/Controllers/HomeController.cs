@@ -162,7 +162,7 @@ namespace EFResertStarFirstDay.Controllers
         }
         [HttpGet]
         [CookieExpresFilter]
-        public ActionResult GetEmailValidateCode(LogInModel model, string Option )
+        public ActionResult GetEmailValidateCode(LogInModel model,string ValidateCode, string Option )
         {
             bool isValidateForSend = false;
             bool sendIsOk = false;
@@ -250,7 +250,7 @@ namespace EFResertStarFirstDay.Controllers
                 var str = CreateJavaScript.CreateJS(5);
                 return JavaScript(str);
             }
-            return new HttpStatusCodeResult(505);
+            return new HttpStatusCodeResult(400);
         }
 
         public void LoginModifySessionData(HttpContextBase httpContext)
