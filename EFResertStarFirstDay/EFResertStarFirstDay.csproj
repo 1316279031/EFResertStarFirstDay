@@ -323,6 +323,7 @@
     <Compile Include="Models\ModelBLL\IUnCheckAccount.cs" />
     <Compile Include="Models\ModelBLL\LoginValidate.cs" />
     <Compile Include="Models\ModelBLL\TableDataAJaxPost\ISchoolTableUpdateDatabase.cs" />
+    <Compile Include="Models\ModelBLL\TableDataAJaxPost\IStudentUpdateDabase.cs" />
     <Compile Include="Models\ModelBLL\TableDataAJaxPost\UpdateDataBase.cs" />
     <Compile Include="Models\ViewModel\LogInModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -360,6 +361,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile12.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile13.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile14.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile15.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile3.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile4.pubxml" />

@@ -40,12 +40,9 @@ namespace EFResertStarFirstDay.Controllers
             ISchoolAdministratorDal sc = new SchoolAdministratorDal(ConfigurationManager.AppSettings["assembly"]);
             SchoolAdministrator adminTable = new SchoolAdministrator();
             var jsonData = get.GetEntitys(x => true, sc).ToList();
-            //JSON序列化配置
-            JsonSerializerSettings setting = new JsonSerializerSettings();
-            setting.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            setting.Formatting = Formatting.None;
+            ViewData["dd"] = "qweqwe";
             //将对象序列化为JSON格式
-           var json= JsonConvert.SerializeObject(jsonData, setting);
+           var json= CreateJson(jsonData);
             return Json(json, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
@@ -56,15 +53,46 @@ namespace EFResertStarFirstDay.Controllers
            var isUpdate=  update.UpData(adminDatas, new SchoolAdministratorDal(ConfigurationManager.AppSettings["assembly"]));
            if (isUpdate)
            {
-                //JSON序列化配置
-                JsonSerializerSettings setting = new JsonSerializerSettings();
-                setting.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                setting.Formatting = Formatting.None;
                 //将对象序列化为JSON格式
-                var json = JsonConvert.SerializeObject(adminDatas, setting);
+                var json = CreateJson(adminDatas);
                 return Json(json);
            }
            return  new HttpStatusCodeResult(404,"保存失败");
+        }
+        [HttpGet]
+        //请求是学籍管理者的请求(只允许学籍管理者通过这里的请求)为了测试暂时所有权限放开
+        public ActionResult StuStatusAdministrator()
+        {
+            IStudentDetialDataDal dal = new StudentDetialDatasDal(ConfigurationManager.AppSettings["assembly"]);
+            List<StudentDetialData> list = new List<StudentDetialData>();
+            list = dal.GetEntityForExpress(x => true).ToList();
+            //序列化为JSON数据
+            var json = CreateJson(list);
+            return Json(
+                json, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult StuStatusAdministrator(IEnumerable<StudentDetialData> adminDatas)
+        {
+            IStudentDetialDataDal dal = new StudentDetialDatasDal(ConfigurationManager.AppSettings["assembly"]);
+            IStudentUpdateDabase update= new UpdateDataBase();
+           bool isUpdate= update.UpData(adminDatas, dal);
+           if (isUpdate)
+           {
+                //将对象序列化为JSON格式
+                var json = CreateJson(adminDatas);
+                return Json(json);
+            }
+            return new HttpStatusCodeResult(404,"无法保存");
+        }
+        public string CreateJson<T>(T obj)
+        {
+            //JSON序列化配置
+            JsonSerializerSettings setting = new JsonSerializerSettings();
+            setting.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            setting.Formatting = Formatting.None;
+            var str=JsonConvert.SerializeObject(obj,setting);
+            return str;
         }
     }
 }

@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="admini">
-                    <span><a href="#" class="redict">学籍管理</a></span>
+                    <span><a href="~/AdministartorsViews/StuStatusAdministrator" class="redict">学籍管理</a></span>
                     <div class="detials">
                         <span>学籍录入</span>
                         <span>其他</span>
@@ -91,6 +91,11 @@
                     @RenderSection("view", required: false)
                 </div>
                 <div id="handsontable-code"></div>
+                <div id="hand-buttons">
+                    <button id="saveButton" type="button">保存</button>
+                    <button id="resetButton" type="button">重置</button>
+                    @ViewData["dd"]
+                </div>
             </div>
         </div>
     </div>

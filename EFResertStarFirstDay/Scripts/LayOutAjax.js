@@ -23,7 +23,18 @@ function AjaxRequest(href) {
         success: function (data, e) {
             let json = JSON.parse(data);
             $('.error').remove();
-            CreateTable(json,href);//创建表格（根据数据创建表格）但目前先搭起整个框架的样子，之后在使用Json数据创建表格
+            console.log(href);
+            switch (href) {
+                case "/AdministartorsViews/XzViews":
+                    {
+                        CreateTableZxTable(json, href);//创建表格（根据数据创建表格）但目前先搭起整个框架的样子，之后在使用Json数据创建表格
+                    }; break;
+                case "/AdministartorsViews/StuStatusAdministrator":
+                    {
+                    CreateStuStatusAdministratorTable(json, href);
+                }; break;
+                default :;break;
+            }
         },
         error: function(e) {
             console.log(e);

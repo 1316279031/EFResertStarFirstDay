@@ -17,11 +17,13 @@ namespace IEFDAL
         /// <param name="id">根据主键查找返回</param>
         /// <returns>返回一个T实体</returns>
         T GetEntity(string id);
+
         /// <summary>
         /// 根据用户条件返回
         /// </summary>
         /// <param name="expression">自定义表达式查找</param>
         /// <returns>返回一组可延迟查找的Iqueryable<T>实体</returns>
+        T GetEntity(int id);
         IQueryable<T> GetEntityForExpress(Expression<Func<T, bool>> expression);
         /// <summary>
         /// 添加
@@ -41,5 +43,12 @@ namespace IEFDAL
         /// <param name="entity">需要进行删除的实体</param>
         /// <returns>返回true表示保存成功;返回fasle表示保存失败</returns>
         bool Delete(T entity);
+        /// <summary>
+        /// 更新不同属性对象
+        /// </summary>
+        /// <param name="aimsEntity">需要更新的上下文被追踪的对象</param>
+        /// <param name="entity">拥有更新值的对象</param>
+        /// <returns></returns>
+        bool UpdateToCurrentValuesSets(T aimsEntity, T entity); 
     }
 }

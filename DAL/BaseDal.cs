@@ -24,6 +24,10 @@ namespace DAL
         {
             return dbContext.Set<T>().Find(id);
         }
+        public T GetEntity(int id)
+        {
+            return dbContext.Set<T>().Find(id);
+        }
         //根据用户条件返回
         public IQueryable<T> GetEntityForExpress(Expression<Func<T, bool>> expression)
         {
@@ -40,6 +44,12 @@ namespace DAL
         {
             dbContext.Entry(entity).State = EntityState.Modified;
             return dbContext.SaveChanges() > 0;
+        }
+        //aimsEntity上下文中获取来的对象，用于更新数据
+        public bool UpdateToCurrentValuesSets(T aimsEntity,T entity)
+        {
+            dbContext.Entry(aimsEntity).CurrentValues.SetValues(entity);
+            return dbContext.SaveChanges()>0;
         }
         //D
         public bool Delete(T entity)

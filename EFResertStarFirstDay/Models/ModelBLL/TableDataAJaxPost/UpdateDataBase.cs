@@ -10,7 +10,7 @@ using IEFDAL;
 
 namespace EFResertStarFirstDay.Models.ModelBLL.TableDataAJaxPost
 {
-    public class UpdateDataBase:ISchoolTableUpdateDatabase
+    public class UpdateDataBase:ISchoolTableUpdateDatabase,IStudentUpdateDabase
     {
         public bool UpData(IEnumerable<SchoolAdministrator> datas, ISchoolAdministratorDal dal)
         {
@@ -25,8 +25,40 @@ namespace EFResertStarFirstDay.Models.ModelBLL.TableDataAJaxPost
                 
                 foreach (var data in datas)
                 {
-                  var entity=  dal.GetEntity(data.AdministratorAccount);entity.CreateAdminitratorDetialDatas.IsFreeze = data.CreateAdminitratorDetialDatas.IsFreeze;
+                    if (data == null)
+                    {
+                        continue;
+                    }
+                    var entity=dal.GetEntity(data.AdministratorAccount);entity.CreateAdminitratorDetialDatas.IsFreeze = data.CreateAdminitratorDetialDatas.IsFreeze;
                     bool isUp= dal.Update(entity);
+                }
+            }
+            catch (Exception e)
+            {
+                updateIsFun = false;
+            }
+            return updateIsFun;
+        }
+
+        public bool UpData(IEnumerable<StudentDetialData> datas, IStudentDetialDataDal dal)
+        {
+            if (datas == null || dal == null)
+            {
+                return false;
+            }
+
+            bool updateIsFun = true;
+            try
+            {
+
+                foreach (var data in datas)
+                {
+                    if (data == null)
+                    {
+                        continue;
+                    }
+                    var entity = dal.GetEntity(data.ID); 
+                    bool isUp = dal.UpdateToCurrentValuesSets(entity,data);
                 }
             }
             catch (Exception e)
