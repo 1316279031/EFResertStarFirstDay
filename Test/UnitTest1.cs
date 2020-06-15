@@ -16,20 +16,20 @@ namespace Test
                 StudentDb stu = new StudentDb();
             StudentData studata = new StudentData
             {
-                IdCard = "342626200001180195",
+                IdCard = "342626200001180191",
                 Address = "安徽马鞍山",
-                Telephone = "18855579263",
-                PareventTelephone = "18315508706"
+                Telephone = "17855527769",
+                PareventTelephone = "18855579263"
             };
             StudentDetialData stuDetial = new StudentDetialData
                 {
-                    Name = "黄伟",
+                    Name = "李俊",
                     Department = "计算机系",
                     Class = "18网络2班",
                     StudentDatas = studata
                 };
                 studata.StudentDetialDatas = stuDetial;
-                stu.studentDetialDatas.Add(stuDetial);
+                stu.studentDetialDatas.Remove(stuDetial);
                 stu.SaveChanges();
             }
             catch

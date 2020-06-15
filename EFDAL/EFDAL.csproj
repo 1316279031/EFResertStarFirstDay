@@ -226,6 +226,7 @@
     <Compile Include="ErrorDatabase.cs" />
     <Compile Include="GenerUser.cs" />
     <Compile Include="GenerUserDetial.cs" />
+    <Compile Include="LibrayManagent.cs" />
     <Compile Include="Migrations\202002141347360_InitialCreate.cs" />
     <Compile Include="Migrations\202002141347360_InitialCreate.designer.cs">
       <DependentUpon>202002141347360_InitialCreate.cs</DependentUpon>
@@ -261,6 +262,10 @@
     <Compile Include="Migrations\202002191501385_AddEamil.cs" />
     <Compile Include="Migrations\202002191501385_AddEamil.designer.cs">
       <DependentUpon>202002191501385_AddEamil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006080536450_LibData.cs" />
+    <Compile Include="Migrations\202006080536450_LibData.designer.cs">
+      <DependentUpon>202006080536450_LibData.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -303,6 +308,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002191501385_AddEamil.resx">
       <DependentUpon>202002191501385_AddEamil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006080536450_LibData.resx">
+      <DependentUpon>202006080536450_LibData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

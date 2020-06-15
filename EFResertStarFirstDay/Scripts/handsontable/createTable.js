@@ -7,7 +7,6 @@ let colWidths;//每列宽度
 let colHeaders;//标题行
 let afterChange;//每次修改执行的函数
 let columns;//没列的数据的相关配置
-
 //添加事件监听
 function ButtonsAddEventList(query, href,createTableFunction) {
     let $saveButton = $('#saveButton');
@@ -19,16 +18,19 @@ function ButtonsAddEventList(query, href,createTableFunction) {
             AjaxSubmitData(query, href, createTableFunction);
         });
     $resetButton.on('click',
-        function () {
-            //就相当于重新加载一次但是由于我们有数据所以我们只需要直接重制
-            createTableFunction(resetDatas, href);
-        });
+            function () {
+                //就相当于重新加载一次但是由于我们有数据所以我们只需要直接重制
+                createTableFunction(resetDatas, href);
+            });
 }
 
 //将我们XzJSON数据转换为Javascript数据
 function DealWithData(datas) {
     let currentIndex = 0;
     let data = [];
+    if (datas.forEach == undefined) {
+        datas = JSON.parse(datas);
+    }
     datas.forEach(x => {
         data[currentIndex] = {
             Account: datas[currentIndex].AdministratorAccount,
@@ -62,10 +64,10 @@ function AjaxSubmitData(data, href, createTableFunction) {
         type: 'Post',
         url: href,
         data: { adminDatas: data },
-        success: function(data, e) {
+        success: function(datas, e) {
             console.log("储存成功");
             resetDatas = saveGetDatas;
-            createTableFunction(resetDatas, href);
+            createTableFunction(datas, href);
         },
         error: function (e) {
             console.log(e.status);
@@ -92,6 +94,9 @@ function ValidateQuerYArrayHasElement(account,queryArray,propertyName) {
 }
 //创建Xz权限可看的表格
 function CreateTableZxTable(datas, href) {
+    if (datas.forEach == undefined) {
+        datas = JSON.parse(datas);
+    }
     HtmlReset();//每次创建表格时我们都必须要进行一次页面的重置
     let data = [];//创建表格的数据
     data = DealWithData(datas);
@@ -111,7 +116,8 @@ function CreateTableZxTable(datas, href) {
     let copy = JSON.stringify(datas);
     saveGetDatas = JSON.parse(copy);//深拷贝临时数据
     resetDatas = datas;//获取源数据，并引用源数据
-    colWidths = devWidth / data.length;
+    //设备右边宽度/列数，均摊每列
+    colWidths = devWidth / 4;
     colHeaders = ["账号", "邮箱", "申请权限", "账户状态"];
     afterChange = function(value, source) {
         if (source == "edit") {
@@ -150,6 +156,7 @@ function CreateTableZxTable(datas, href) {
 function DealWithDataForStuAdmin(datas) {
     let currentIndex = 0;
     let data = [];
+
     datas.forEach(x => {
         data[currentIndex] = {
             ID: datas[currentIndex].ID,
@@ -166,6 +173,9 @@ function DealWithDataForStuAdmin(datas) {
     return data;
 }
 function CreateStuStatusAdministratorTable(datas, href) {
+    if (datas.forEach == undefined) {
+        datas = JSON.parse(datas);
+    }
     HtmlReset();//每次创建表格时我们都必须要进行一次页面的重置
     let data = [];//创建表格的数据
     data = DealWithDataForStuAdmin(datas);
@@ -226,8 +236,14 @@ function CreateStuStatusAdministratorTable(datas, href) {
                     query[index] = saveGetDatas[value[i][0]];
                 }
             }
-        }
+        } 
     };
+    afterdelete = function (index, sc) {
+        let count = 0;
+        query[0] = resetDatas[index];
+        ButtonsAddEventList(query,
+            '/AdministartorsViews/StuStatusDeleteAdmin', CreateStuStatusAdministratorTable);
+    }
     let contextMenu = {
         callback: function () {
             //任务
@@ -238,20 +254,136 @@ function CreateStuStatusAdministratorTable(datas, href) {
         items: {
             "row_below": {
                 name: "向下插入一行"
+            },
+            "remove_row": {
+                name: "删除选中行"
             }
         }
     };
-    CreateTable(container, data, colWidths, colHeaders, afterChange, columns, contextMenu);
+    CreateTable(container, data, colWidths, colHeaders,
+        afterChange, columns, contextMenu, afterdelete);
+}
+
+//创建图书管理者可看的表格
+function DealWithDataForStuAdmins(datas) {
+    let currentIndex = 0;
+    let data = [];
+    //如果不支持foreach那么就说明它是json格式，我们将其转换
+    
+    datas.forEach(x => {
+        data[currentIndex] = {
+            ID: datas[currentIndex].ID,
+            Name: datas[currentIndex].Name,
+            Author: datas[currentIndex].Author,
+            DataAdded: datas[currentIndex].DataAdded,
+            PublishingHouse: datas[currentIndex].PublishingHouse,
+        }
+        currentIndex++;
+    });
+    return data;
+}
+//创建图书管理LibrayManagetnTable
+function CreateLibrayManagentTalbe(datas, href) {
+    if (datas.forEach == undefined) {
+        datas = JSON.parse(datas);
+    }
+    HtmlReset();//每次创建表格时我们都必须要进行一次页面的重置
+    let data = [];//创建表格的数据
+    data = DealWithDataForStuAdmins(datas);
+    query = [];
+    let copy = JSON.stringify(datas);
+    saveGetDatas = JSON.parse(copy);//深拷贝临时数据
+    resetDatas = datas;//获取源数据，并引用源数据
+    ButtonsAddEventList(query, "/AdministartorsViews/LibrayManagent", CreateLibrayManagentTalbe);
+    container = document.getElementById("handsontable-code");
+    devWidth = $('.views').width();
+    colWidths = devWidth / 5;
+    colHeaders = ['书号', "书名", "作者", "上架日期", "出版社"];
+    columns = [
+        {
+            data: "ID",
+            readOnly: true
+        },
+        {
+            data: "Name"
+        }, {
+            data: "Author"
+        }, {
+            data: "DataAdded"
+        }, {
+            data: "PublishingHouse"
+        }
+    ];
+
+    afterChange = function (value, source) {
+        let count = 0;
+        if (source == "edit") {
+            let va = {};
+            let properityName;
+            let modifyValue;
+            console.log(value);
+            for (let i = 0; i < value.length; i++) {
+                properityName = value[i][1];
+                modifyValue = value[i][3];
+                let index;
+                if (properityName in saveGetDatas[value[i][0]]) {
+                    saveGetDatas[value[i][0]][properityName] = modifyValue;
+                }
+                index = ValidateQuerYArrayHasElement(datas[value[i][0]].ID, query, "ID");
+                if (index < 0) {
+                    query.push(saveGetDatas[value[i][0]]);
+                } else {
+                    query[index] = saveGetDatas[value[i][0]];
+                }
+            }
+        }
+    };
+    afterdelete = function (index, sc) {
+        let count = 0;
+        let i = 0;
+        for (let k = index; k < index + sc; k++,i++) {
+            query[i] = resetDatas[k]
+        }
+        ButtonsAddEventList(query, '/AdministartorsViews/LibrayManagentDelete', CreateLibrayManagentTalbe);
+    }
+    afterAddRow = function (index, sc) {
+        let count = 0;
+        let que = [];
+       
+        que[0] = data[index];
+        ButtonsAddEventList(que, '/AdministartorsViews/InserLibrayManagent', CreateLibrayManagentTalbe);
+    }
+    let contextMenu = {
+        callback: function () {
+            //任务
+            //添加一行dsaveGetDatas数组中我们需要push一个
+            console.log(5);
+            //然后我们需要修改后端的逻辑，当没有找到相关ID实体是我们在数据中Add一个
+        },
+        items: {
+            "row_below": {
+                name: "向下插入一行"
+            },
+            "remove_row": {
+                name: "删除选中设备"
+            }
+        }
+    };
+    CreateTable(container, data, colWidths, colHeaders,
+        afterChange, columns, contextMenu, afterdelete, afterAddRow);
 }
 //创建表格通过传递一些参数设置表格
-function CreateTable(container,data, colWidths, colHeaders, afterChange, columns,contextMenu) {
+function CreateTable(container, data, colWidths,
+    colHeaders, afterChange, columns, contextMenu, afterdelete, afterAddRow) {
     let hot = new Handsontable(container,
         {
             data: data,
             width: "100%",
             colWidths: colWidths,
             colHeaders: colHeaders,
-            afterChange: afterChange,
+            afterChange: afterChange,//修改后
+            afterRemoveRow: afterdelete,//删除后
+            afterCreateRow: afterAddRow,
             columns:columns,
             className:
                 "htCenter htMiddle",

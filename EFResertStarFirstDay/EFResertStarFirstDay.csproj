@@ -322,6 +322,9 @@
     <Compile Include="Models\ModelBLL\ILoinValidate.cs" />
     <Compile Include="Models\ModelBLL\IUnCheckAccount.cs" />
     <Compile Include="Models\ModelBLL\LoginValidate.cs" />
+    <Compile Include="Models\ModelBLL\TableDataAJaxPost\DeleteDatas.cs" />
+    <Compile Include="Models\ModelBLL\TableDataAJaxPost\ILibrayInsertDatabase.cs" />
+    <Compile Include="Models\ModelBLL\TableDataAJaxPost\InsertData.cs" />
     <Compile Include="Models\ModelBLL\TableDataAJaxPost\ISchoolTableUpdateDatabase.cs" />
     <Compile Include="Models\ModelBLL\TableDataAJaxPost\IStudentUpdateDabase.cs" />
     <Compile Include="Models\ModelBLL\TableDataAJaxPost\UpdateDataBase.cs" />

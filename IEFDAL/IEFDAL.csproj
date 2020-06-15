@@ -59,6 +59,7 @@
     <Compile Include="IErrorDatabaseDal.cs" />
     <Compile Include="IGenerUserDal.cs" />
     <Compile Include="IGenerUserDetialDal.cs" />
+    <Compile Include="ILibrayManagentDAL.cs" />
     <Compile Include="IRegisterValidateCodeDal.cs" />
     <Compile Include="ISessionDal.cs" />
     <Compile Include="IStudentDataDal.cs" />

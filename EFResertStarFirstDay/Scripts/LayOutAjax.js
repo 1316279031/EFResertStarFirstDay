@@ -21,18 +21,22 @@ function AjaxRequest(href) {
             $views.append('<div class="error"><p>加载中。。。。</p></div>');
         },
         success: function (data, e) {
-            let json = JSON.parse(data);
             $('.error').remove();
             console.log(href);
             switch (href) {
                 case "/AdministartorsViews/XzViews":
                     {
-                        CreateTableZxTable(json, href);//创建表格（根据数据创建表格）但目前先搭起整个框架的样子，之后在使用Json数据创建表格
+                        CreateTableZxTable(data, href);//创建表格（根据数据创建表格）但目前先搭起整个框架的样子，之后在使用Json数据创建表格
                     }; break;
                 case "/AdministartorsViews/StuStatusAdministrator":
                     {
-                    CreateStuStatusAdministratorTable(json, href);
-                }; break;
+                        CreateStuStatusAdministratorTable(data, href);
+                    }; break;
+                case "/AdministartorsViews/LibrayManagent":
+                    {
+                        CreateLibrayManagentTalbe(data, href);
+                    }
+                    break;
                 default :;break;
             }
         },

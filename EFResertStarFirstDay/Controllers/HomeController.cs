@@ -74,84 +74,34 @@ namespace EFResertStarFirstDay.Controllers
         //如果cookie已过期则将session保存的验证码置0
         [LogInCookieTimeValidate]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LogInModel model,string ValidateCode, string Option)
+        public ActionResult Login(LogInModel model,string ValidateCode, string Option= "administartor")
         {
             var sessionValidateCode = "";
             var XzPassword = "";
             try
             {
                 //登录逻辑代码
-                switch (Option)
-                {
-                    case "Xz":
-                        {
-                            #region 校长动态密码校验码登录
-                            sessionValidateCode = Session["XzValidate"] == null ? "" : Session["XzValidate"].ToString();
-                            XzPassword = Session["XzPassword"] == null ? "" : Session["XzPassword"].ToString(); 
-                            if (!ComentBll.ExaminationEquals(ValidateCode, sessionValidateCode))
-                            {
-                                ModelState.AddModelError("LogInError", "验证码不正确");
-                                return View();
-                            }
-                            if (model.Account == "1316279031" && model.Password != "" && model.Password == XzPassword)
-                            {
-                                var cookie = HttpContext.Request.Cookies["GetValidateTime"];
-                                ComentBll.SettingExpiredCookie(HttpContext, cookie);
-                                LoginModifySessionData(HttpContext);
-                                Session["XzUserLogin"] = "1316279031";
-                                return Redirect("~/AdministartorsViews/Home");
-                            }
-                            #endregion
-                        }; break;
-                    case "generUser":
-                        {
-                        #region 普通用户登录 
-                        sessionValidateCode = Session["GenerUser"] == null ? "" : Session["GenerUser"].ToString();
-                            if (!ComentBll.ExaminationEquals(ValidateCode, sessionValidateCode))
-                            {
-                                ModelState.AddModelError("LogInError", "验证码不正确");
-                                return View();
-                            }
-                            ILoinValidate genlog = new LoginValidate();
-                            #region 普通用户登录代码
-                            if (genlog.ValidateAccount(model, option: Option))//验证:true Ok false Not Ok
-                            {
-                                var cookie = HttpContext.Request.Cookies["GetValidateTime"];
-                                ComentBll.SettingExpiredCookie(HttpContext, cookie);
-                                LoginModifySessionData(HttpContext);
-                                //登录的账户与密码验证成功
-                                Session["GenerUserLogin"] = model.Account;
-                                return Content("普通用户登录成功");
-                            }
-                            #endregion
-                        #endregion
-                        }; break;
-                    case "administartor":
-                        {
-                        #region 管理员登录代码
+                #region 管理员登录代码
 
-                        sessionValidateCode = Session["Administartor"] == null ? "" : Session["Administartor"].ToString();
-                        if (!ComentBll.ExaminationEquals(ValidateCode, sessionValidateCode))
-                        {
-                            ModelState.AddModelError("LogInError", "验证码不正确");
-                                return View();
-                        }
-                        ILoinValidate genlog = new LoginValidate();
-                            #region 管理员登录代码
-                            if (genlog.ValidateAccount(model, Option))
-                            {
-                                var cookie = HttpContext.Request.Cookies["GetValidateTime"];
-                                ComentBll.SettingExpiredCookie(HttpContext, cookie);
-                                LoginModifySessionData(HttpContext);
-                                Session["AdminUserLogin"] = model.Account;
-                                //登录的账户与密码验证成功
-                                return Redirect("~/AdministartorsViews/Home");
-                            }
-                            #endregion
-                        #endregion
-                        }; break;
-                    default:; break;
+                sessionValidateCode = Session["Administartor"] == null ? "" : Session["Administartor"].ToString();
+                if (!ComentBll.ExaminationEquals(ValidateCode, sessionValidateCode))
+                {
+                    ModelState.AddModelError("LogInError", "验证码不正确");
+                    return View();
                 }
+                ILoinValidate genlog = new LoginValidate();
+                #region 管理员登录代码
+                if (genlog.ValidateAccount(model, Option))
+                {
+                    var cookie = HttpContext.Request.Cookies["GetValidateTime"];
+                    ComentBll.SettingExpiredCookie(HttpContext, cookie);
+                    LoginModifySessionData(HttpContext);
+                    Session["AdminUserLogin"] = model.Account;
+                    //登录的账户与密码验证成功
+                    return Redirect("~/AdministartorsViews/Home");
+                }
+                #endregion
+                #endregion
             }
             catch (Exception e)
             {
@@ -162,7 +112,7 @@ namespace EFResertStarFirstDay.Controllers
         }
         [HttpGet]
         [CookieExpresFilter]
-        public ActionResult GetEmailValidateCode(LogInModel model,string ValidateCode, string Option )
+        public ActionResult GetEmailValidateCode(LogInModel model,string ValidateCode, string Option= "administartor")
         {
             bool isValidateForSend = false;
             bool sendIsOk = false;
@@ -174,64 +124,19 @@ namespace EFResertStarFirstDay.Controllers
             String validateCode = CreateValidateCode.CreateValidateCodes();
             try
             {
-                switch (Option)
-            {
-                case "Xz":
+                if (model.Account == null || model.Password == null)
                 {
-                        if (model.Account == null)
-                        {
-                            return JavaScript("");
-                        }
-                        else
-                        {
-                            //选择校长邮箱发送随机验证码登录
-                            //默认用户
-                            if (model.Account == "1316279031")
-                            {
-                                //动态密码
-                                string password = CreateValidateCode.CreateValidateCodes(4);
-                                sendIsOk = sendEmail.SeendEmail("1316279031", "1316279031@qq.com",
-                                    validateCode, "登陆验证", Password: password, null);
-                                //校验码
-                                Session["XzValidate"] = validateCode;
-                                Session["XzPassword"] = password;
-                            }
-                        }
-                };break;
-                case "generUser":
+                    return JavaScript("");
+                }
+                Session["Administartor"] = validateCode;
+                ILoinValidate log = new LoginValidate();
+                if (sendIsOk == false && log.ValidateAccount(model, option: Option))
                 {
-                        if (model.Account == null || model.Password == null)
-                        {
-                            return JavaScript("");
-                        }
-                        Session["GenerUser"] = validateCode;
-                        ILoinValidate log = new LoginValidate();
-                        if (sendIsOk == false && log.ValidateAccount(model, option: Option))
-                        {
-                                //获取用户
-                                var generUser = getEntity.GetEntityForKey(model.Account, gerDal);
-                                sendIsOk = sendEmail.SeendEmail(generUser.User, generUser.UserDetial.Email,
-                                    validateCode, "登陆验证");
-                        }
-                };break;
-                case "administartor":
-                {
-                        if (model.Account == null || model.Password == null)
-                        {
-                            return JavaScript("");
-                        }
-                        Session["Administartor"] = validateCode;
-                        ILoinValidate log = new LoginValidate();
-                        if (sendIsOk == false && log.ValidateAccount(model, option: Option))
-                        {
-                            var entity = getEntity.GetEntityForKey(model.Account,
-                                accountSchoolDal);
-                            sendIsOk = sendEmail.SeendEmail(entity.AdministratorAccount, entity.CreateAdminitratorDetialDatas.Email,
-                                validateCode, "登陆验证");
-                        }
-                } ; break;
-                default:;break;
-            }
+                    var entity = getEntity.GetEntityForKey(model.Account,
+                        accountSchoolDal);
+                    sendIsOk = sendEmail.SeendEmail(entity.AdministratorAccount, entity.CreateAdminitratorDetialDatas.Email,
+                        validateCode, "登陆验证");
+                }
             }
             catch (Exception e)
             {

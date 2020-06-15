@@ -33,13 +33,13 @@ namespace EFDAL
    {
        public CreateAdminitratorDetialDataConfig()
        {
-           ToTable("CreateAdminitratorDetialDatas");
-           HasKey(x => x.ID);
-           Property(x => x.AdministratorAuthority).IsRequired();
+            ToTable("CreateAdminitratorDetialDatas");
+            HasKey(x => x.ID);
+            Property(x => x.AdministratorAuthority).IsRequired();
             Property(x => x.IsFreeze);
-            Property(x => x.Email).IsRequired().HasMaxLength(40).HasColumnAnnotation("Index",new IndexAnnotation(new IndexAttribute("IX_Email"){IsUnique = true}));
+            Property(x => x.Email).IsRequired().HasMaxLength(40).HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute("IX_Email") { IsUnique = true }));
             Property(x => x.Message);
             HasRequired(x => x.SchoolAdministrators).WithRequiredDependent(x => x.CreateAdminitratorDetialDatas).WillCascadeOnDelete(true);
-       }
+        }
    }
 }

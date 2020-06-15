@@ -24,7 +24,7 @@ namespace EFResertStarFirstDay.Models.ModelBLL
     {
         private  string Apiurl = "https://api.sendcloud.net/apiv2/mail/send";
         private string api_user = "jet_olp_test_AJdX5r";
-        private string api_key = "pR552vh5BiBlyXjX";
+        private string api_key = "PLOjBuY7JJl2MQ3v";
         private string from = "Jet@q76zhZsCo6K9y4DY5a9Z9JEYiL1oBfKO.sendcloud.org";
         //HttpClient用于发送http请求
         private HttpClient client = null;
@@ -98,7 +98,7 @@ namespace EFResertStarFirstDay.Models.ModelBLL
             paramList.Add(new KeyValuePair<string, string>("apiKey", api_key));
             paramList.Add(new KeyValuePair<string, string>("from",from));
             paramList.Add(new KeyValuePair<string, string>("fromName", fromName));
-            paramList.Add(new KeyValuePair<string, string>("to", to));
+             paramList.Add(new KeyValuePair<string, string>("to", to));
             paramList.Add(new KeyValuePair<string, string>("subject", subject));
             paramList.Add(new KeyValuePair<string, string>("html", htmlText));
             return paramList;
